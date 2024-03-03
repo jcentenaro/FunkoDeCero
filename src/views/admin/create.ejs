@@ -5,7 +5,7 @@
   <!--Main content section-->
   <main>
     <h1>Crear Producto</h1>
-
+      <!-- Este código nos permite imprimir los errores en pantalla en caso que existan -->
       <% if (typeof errors != 'undefined') { %>
       <ul>
         <% errors.forEach(error => { %>
@@ -13,6 +13,7 @@
         <% }) %>
       </ul>
       <% } %>
+      <!-- Fin impresión errores -->
 
       <form
         action="/admin/productos"
@@ -25,6 +26,9 @@
             type="text"
             id="nombre"
             name="nombre"
+            value="<%= typeof values != 'undefined' ? values.nombre : '' %>"
+            required
+            nimLength="3"
           />
         </div>
         <div>
@@ -33,6 +37,9 @@
             type="number"
             id="precio"
             name="precio"
+            value="<%= typeof values != 'undefined' ? values.precio : '' %>"
+            required
+            min="1"
 
           />
         </div>

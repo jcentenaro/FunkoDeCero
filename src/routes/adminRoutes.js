@@ -4,10 +4,27 @@ const router = express.Router();
 const multer = require("multer");
 const upload = multer({ storage: multer.memoryStorage() });
 
-const controller = require("../controllers/adminController")
+const { body } = require("express-validator");
+
+const validations = [
+    body("nombre")
+        .not()
+        .isEmpty()
+        .withMessage("El nombre es obligatorio")
+        .bail()
+        .isLength({ min: 3 })
+        .withMessage("Debe tener como mínimo 3 caracteres"),
+    body("precio")
+        .not()
+        .isEmpty()
+        .withMessage("El precio es obligatorio"),
+];
+
+const controller = require("../controllers/adminController");
 //cambio app por router que es lo que maneja las rutas
 router.get("/", controller.index);
-router.post("/", upload.single("imagen"), controller.store);
+// Primero multer, después validador
+router.post("/", upload.single("imagen"), validations, controller.store);
 router.put("/:id", controller.update);
 router.delete("/:id", controller.destroy)
 
