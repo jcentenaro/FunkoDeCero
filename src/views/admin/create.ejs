@@ -32,6 +32,24 @@
           />
         </div>
         <div>
+          <label for="description">Descripción: </label>
+          <input
+            type="text"
+            id="description"
+            name="description"
+            value="<%= typeof values != 'undefined' ? values.description : '' %>"
+          />
+        </div>
+        <div>
+          <label for="sku">Sku: </label>
+          <input
+            type="text"
+            id="sku"
+            name="sku"
+            value="<%= typeof values != 'undefined' ? values.sku : '' %>"
+          />
+        </div>
+        <div>
           <label for="precio">Precio: </label>
           <input
             type="number"
@@ -45,7 +63,7 @@
         </div>
         <div>
           <label for="imagen">Imagen: </label>
-          <input type="file" id="imagen" name="imagen" />
+          <input type="file" id="imagen" name="imagen" accept="image/*" />
         </div>
         <button type="submit">Guardar</button>
       </form>

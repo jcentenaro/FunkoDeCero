@@ -8,7 +8,7 @@ const model = require("../models/productos");
 const index = async (req, res) => {
     try {
       const productos = await model.findAll();
-      console.log(productos);
+      // console.log(productos);
       res.render("admin/index", { productos });
     } catch (error) {
       console.log(error);
@@ -20,7 +20,7 @@ const createView = (req, res) => {
     res.render("admin/create");
 };
 
-const store = (req, res) => {
+const store = async (req, res) => {
     // console.log(req.body, req.file);
 
     const errors = validationResult(req);
@@ -32,17 +32,29 @@ const store = (req, res) => {
     });
   }
 
-    if (req.file) {
-    sharp(req.file.buffer)
-    .resize({
-        width: 300,
-        height: 300,
-        fit: sharp.fit.cover,
-        position: sharp.strategy.entropy
-      })
-    .toFile(path.resolve(__dirname, "../../public/uploads/image.jpg"));
+  try {
+    const producto = await model.create(req.body);
+    // console.log(producto);
+
+    if (producto && req.file) {
+      sharp(req.file.buffer)
+      .resize({
+          width: 300,
+          height: 300,
+          fit: sharp.fit.cover,
+          position: sharp.strategy.entropy
+        })
+      .toFile(path.resolve(__dirname, 
+        `../../public/uploads/producto_${producto.id}.jpg`
+        )
+      );
     }
-res.send("CREAR PRODUCTO");
+    res.redirect("/admin/productos");
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
+
 };
 
 const update = (req, res) => {

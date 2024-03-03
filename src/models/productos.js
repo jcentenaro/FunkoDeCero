@@ -3,16 +3,33 @@ const { DataTypes } = require("sequelize");
 const sequelize = require("../config/conn");
 
 const Producto = sequelize.define("Producto", {
-  sku: {
-    type: DataTypes.STRING,
-    allowNull: true,
-  },  
+   
   nombre: {
     type: DataTypes.STRING,
     allowNull: false,
   },
+  description: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
   precio: {
     type: DataTypes.FLOAT,
+    allowNull: true,
+  },
+  stock: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+  discount: {
+    type: DataTypes.INTEGER,
+    allowNull: true,
+  },
+  sku: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  }, 
+  dues: {
+    type: DataTypes.INTEGER,
     allowNull: true,
   },
   });
