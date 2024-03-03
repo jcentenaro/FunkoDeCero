@@ -1,3 +1,6 @@
+const path = require("path");
+const sharp = require("sharp");
+
 const index = (req, res) => {
     // Prueba con datos estáticos
     const productos = [
@@ -13,8 +16,16 @@ const index = (req, res) => {
         title: "Admin | Productos",
         productos});
 };
+const createView = (req, res) => {
+    res.render("admin/create");
+};
 const store = (req, res) => {
-    console.log(req.body);
+    console.log(req.body, req.file);
+
+    sharp(req.file.buffer)
+    .resize(300)
+    .toFile(path.resolve(__dirname, "../../public/uploads/image.jpg"));
+
     res.send("CREAR PRODUCTO");
 };
 const update = (req, res) => {
@@ -24,9 +35,6 @@ const update = (req, res) => {
 const destroy = (req, res) => {
     console.log(req.params, req.body);
     res.send("Producto Borrado");
-};
-const createView = (req, res) => {
-    res.send("CREATE");
 };
 
 const updateView =(req, res) => {

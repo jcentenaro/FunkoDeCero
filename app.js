@@ -1,6 +1,8 @@
 const express = require("express");
 const app = express();
-const expressLayouts = require("express-ejs-layouts");
+const path = require("path");
+
+// const expressLayouts = require("express-ejs-layouts");
 // Poner sitio en mantenimiento
 // app.use((req, res, next) => {
 //     next();
@@ -14,16 +16,16 @@ app.set("view engine", "ejs");
 app.set("views", "./src/views");
 
 //Pido que use express-layouts
-app.use(expressLayouts);
+// app.use(expressLayouts);
 // y le digo que cuando lo busque, lo busque en layout/layout
-app.set("layout", "layouts/layout");
+// app.set("layout", "layouts/layout");
 
 // Pido que use el _method de override
 app.use(methodOverride("_method"));
 
 
 // Uso un middleware propio de express para definir qué va a ser público. Todo lo que esté en la carpeta "public" estará a la vista de todos
-app.use(express.static(__dirname + "/public"));
+app.use(express.static(path.join(__dirname, "/public")));
 // Middleware que me permite tomar lo del formulario
 app.use(express.urlencoded({ extended: false}));
 // Pagína de Inicio + Express Router con modulos
@@ -65,7 +67,7 @@ app.get("/producto/:id", (req, res) => {
 // app.use(mainRoutes);
 // lo mismo que arriba pero simplificado en una linea
 app.use("/", require("./src/routes/mainRoutes.js"));
-app.use("/admin", require("./src/routes/adminRoutes.js"));
+app.use("/admin/productos", require("./src/routes/adminRoutes.js"));
 app.use("/shop", require("./src/routes/shopRoutes.js"));
 app.use("/auth", require("./src/routes/authRoutes.js"));
 
