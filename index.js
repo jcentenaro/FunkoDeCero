@@ -1,3 +1,5 @@
+require("dotenv").config();
+
 const express = require("express");
 const app = express();
 const path = require("path");
@@ -10,6 +12,7 @@ const path = require("path");
 // });
 //instalo npm i override para que el form pueda simular un PUT o DELETE. Y lo llamo
 const methodOverride = require("method-override");
+const sequelize = require("./src/config/conn.js");
 // Motor de vistas
 app.set("view engine", "ejs");
 //Ahora le digo en donde van a estar las vistas
@@ -77,4 +80,13 @@ app.use((req, res, next) => {
 });
 
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`http://localhost:${PORT}`));
+
+app.listen(PORT, async () => {
+    try {
+        await sequelize.authenticate();
+    } catch (error) {
+        console.log(error);
+    }
+    
+    console.log(`http://localhost:${PORT}`);
+});

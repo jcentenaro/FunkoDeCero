@@ -3,20 +3,17 @@ const sharp = require("sharp");
 
 const {validationResult } = require("express-validator");
 
-const index = (req, res) => {
-    // Prueba con datos estáticos
-    const productos = [
-        { id: 1, sku: "SKU1111", nombre: "Harry ", licencia: "Harry Potter", categoria: "Toys"},
-        { id: 2, sku: "SKU2222", nombre: "Luke", licencia: "Star Wars", categoria: "Remeras"},
-        { id: 3, sku: "SKU3333", nombre: "Pokemon", licencia: "Star Wars", categoria: "Libros"},
-        { id: 4, sku: "SKU4444", nombre: "Hermonide ", licencia: "Harry Potter", categoria: "Toys"},
-        { id: 5, sku: "SKU5555", nombre: "Luke", licencia: "Star Wars", categoria: "Remeras"},
-        { id: 6, sku: "SKU6666", nombre: "Pokemon", licencia: "Pokemon", categoria: "Libros"},
-        
-    ];
-    res.render('admin/index', {
-        title: "Admin | Productos",
-        productos});
+const model = require("../models/productos");
+
+const index = async (req, res) => {
+    try {
+      const productos = await model.findAll();
+      console.log(productos);
+      res.render("admin/index", { productos });
+    } catch (error) {
+      console.log(error);
+      res.status(500).send(error);
+    }
 };
 
 const createView = (req, res) => {
