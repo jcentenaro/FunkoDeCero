@@ -25,8 +25,10 @@ const controller = require("../controllers/adminController");
 router.get("/", controller.index);
 // Primero multer, después validador
 router.post("/", upload.single("imagen"), validations, controller.store);
-router.put("/:id", controller.update);
+router.put("/:id", upload.single("imagen"), validations, controller.update);
 router.delete("/:id", controller.destroy)
+router.get("/:id/edit", controller.editView);
+
 
 // Migro a adminController con reservas
 router.get("/create", controller.createView);

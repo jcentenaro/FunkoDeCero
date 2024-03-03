@@ -57,9 +57,47 @@ const store = async (req, res) => {
 
 };
 
-const update = (req, res) => {
+const update = async (req, res) => {
     console.log(req.params, req.body);
-    res.send("Producto Modificado");
+
+    const errors = validationResult(req);
+
+  if (!errors.isEmpty()) {
+    return res.render("admin/edit", {
+      values: req.body,
+      errors: errors.array(),
+    });
+  }
+
+  try {
+    const affected = await model.update(req.body, {
+      where: {
+        id: req.params.id,
+      },
+    });
+    if (affected[0] == 1) {
+      if (req.file) {
+        sharp(req.file.buffer)
+        .resize({
+            width: 300,
+            height: 300,
+            fit: sharp.fit.cover,
+            position: sharp.strategy.entropy
+          })
+        .toFile(path.resolve(__dirname, 
+          `../../public/uploads/producto_${req.params.id}.jpg`
+          )
+        );
+      }
+
+      res.redirect("/admin/productos");
+    } else {
+      res.status(500).send("Error al actualizar");
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
 };
 
 const destroy = (req, res) => {
@@ -71,8 +109,18 @@ const updateView =(req, res) => {
     res.send("ID GET");
 };
 
-const editView = (req, res) => {
-    res.send("ID PUT");
+const editView = async (req, res) => {
+  try {
+    const producto = await model.findByPk(req.params.id);
+
+    if(producto) {
+      res.render("admin/edit", { values: producto });
+    } else {
+      res.status(404).send("El Producto no existe");
+    }
+  } catch (error) {
+    console.log(error);
+  }  
 };
 
 const deleteId = (req, res) => {

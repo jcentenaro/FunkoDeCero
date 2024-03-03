@@ -1,0 +1,84 @@
+<!--Header section with NavBar-->
+<%- include('../components/general/header-admin.ejs') %>
+  <!--Header section with NavBar end-->
+
+  <!--Main content section-->
+  <main>
+    <h1>Editar Producto</h1>
+      <!-- Este código nos permite imprimir los errores en pantalla en caso que existan -->
+      <% if (typeof errors != 'undefined') { %>
+      <ul>
+        <% errors.forEach(error => { %>
+        <li><%= error.msg %></li>
+        <% }) %>
+      </ul>
+      <% } %>
+      <!-- Fin impresión errores -->
+
+      <form
+        action="/admin/productos/<%= values.id %>?_method=PUT"
+        method="post"
+        enctype="multipart/form-data"
+      >
+        <div>
+          <label for="nombre">Nombre: </label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            value="<%= typeof values != 'undefined' ? values.nombre : '' %>"
+            required
+            nimLength="3"
+          />
+        </div>
+        <div>
+          <label for="description">Descripción: </label>
+          <input
+            type="text"
+            id="description"
+            name="description"
+            value="<%= typeof values != 'undefined' ? values.description : '' %>"
+          />
+        </div>
+        <div>
+          <label for="sku">Sku: </label>
+          <input
+            type="text"
+            id="sku"
+            name="sku"
+            value="<%= typeof values != 'undefined' ? values.sku : '' %>"
+          />
+        </div>
+        <div>
+          <label for="precio">Precio: </label>
+          <input
+            type="number"
+            id="precio"
+            name="precio"
+            value="<%= typeof values != 'undefined' ? values.precio : '' %>"
+            required
+            min="1"
+
+          />
+        </div>
+        <div>
+          <label for="imagen">Imagen: </label>
+          <input type="file" id="imagen" name="imagen" accept="image/*" />
+          <div>
+            <img 
+                    class="img-listado"
+                    width="30px" 
+                    src="/uploads/producto_<%= values.id %>.jpg" 
+                    alt="<%= values.nombre %>">
+          </div>
+        </div>
+        <button type="submit">Guardar</button>
+      </form>
+  </main>
+  <!--Main content section end-->
+
+  
+  <!--Footer section-->
+  <%- include('../components/general/footer-admin.ejs') %>
+    <!--Footer section end-->
+    
