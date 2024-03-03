@@ -88,6 +88,10 @@
   text-align: start;
 }
 
+.prod-list-row .row-item-added .img-listado{
+  width: 50px;
+}
+
 .row-item-added-icons{
   display: flex;
   justify-content: space-between;

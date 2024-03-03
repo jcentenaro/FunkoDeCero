@@ -38,23 +38,21 @@
                 <th class="prod-list-row-item row-item-title">ID</th>
                 <th class="prod-list-row-item row-item-title">Código</th>
                 <th class="prod-list-row-item row-item-title">Nombre del Producto</th>
-                <th class="prod-list-row-item row-item-title">Licencia</th>
+                <th class="prod-list-row-item row-item-title">Imagen</th>
                 <th class="prod-list-row-item row-item-title"></th>
               </tr>
               <tr class="prod-list-row">
 
                 <% productos.forEach(producto => {  %> 
+                  <td class="prod-list-row-item row-item-added"><%= producto.id %></td>
+                  <td class="prod-list-row-item row-item-added"><%= producto.sku %></td>
+                  <td class="prod-list-row-item row-item-added"><%= producto.nombre %></td>
                   <td class="prod-list-row-item row-item-added">
-                    <%= producto.id %>
-                  </td>
-                  <td class="prod-list-row-item row-item-added">
-                    <%= producto.sku %>
-                  </td>
-                  <td class="prod-list-row-item row-item-added">
-                    <%= producto.nombre %>
-                  </td>
-                  <td class="prod-list-row-item row-item-added">
-                    <%= producto.description %>
+                    <img 
+                    class="img-listado"
+                    width="30px" 
+                    src="/uploads/producto_<%= producto.id %>.jpg" 
+                    alt="<%= producto.nombre %>">
                   </td>
                   <td class="prod-list-row-item row-item-added">
                     <div class="row-item-added-icons">
