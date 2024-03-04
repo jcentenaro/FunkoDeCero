@@ -1,84 +1,271 @@
 <!--Header section with NavBar-->
 <%- include('../components/general/header-admin.ejs') %>
-  <!--Header section with NavBar end-->
+<!--Header section with NavBar end-->
 
-  <!--Main content section-->
-  <main>
-    <h1>Editar Producto</h1>
-      <!-- Este código nos permite imprimir los errores en pantalla en caso que existan -->
-      <% if (typeof errors != 'undefined') { %>
-      <ul>
-        <% errors.forEach(error => { %>
-        <li><%= error.msg %></li>
-        <% }) %>
-      </ul>
-      <% } %>
-      <!-- Fin impresión errores -->
+<!--Main content section-->
+<main class="main-edit">
+    <!-- Este código nos permite imprimir los errores en pantalla en caso que existan -->
+  <% if (typeof errors != 'undefined') { %>
+  <ul>
+    <% errors.forEach(error => { %>
+    <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+  <% } %>
+  <!-- Fin impresión errores -->
 
-      <form
-        action="/admin/productos/<%= values.id %>?_method=PUT"
-        method="post"
-        enctype="multipart/form-data"
-      >
-        <div>
-          <label for="nombre">Nombre: </label>
-          <input
-            type="text"
-            id="nombre"
-            name="nombre"
-            value="<%= typeof values != 'undefined' ? values.nombre : '' %>"
-            required
-            nimLength="3"
-          />
-        </div>
-        <div>
-          <label for="description">Descripción: </label>
-          <input
-            type="text"
-            id="description"
-            name="description"
-            value="<%= typeof values != 'undefined' ? values.description : '' %>"
-          />
-        </div>
-        <div>
-          <label for="sku">Sku: </label>
-          <input
-            type="text"
-            id="sku"
-            name="sku"
-            value="<%= typeof values != 'undefined' ? values.sku : '' %>"
-          />
-        </div>
-        <div>
-          <label for="precio">Precio: </label>
-          <input
-            type="number"
-            id="precio"
-            name="precio"
-            value="<%= typeof values != 'undefined' ? values.precio : '' %>"
-            required
-            min="1"
-
-          />
-        </div>
-        <div>
-          <label for="imagen">Imagen: </label>
-          <input type="file" id="imagen" name="imagen" accept="image/*" />
-          <div>
-            <img 
-                    class="img-listado"
-                    width="30px" 
-                    src="/uploads/producto_<%= values.id %>.jpg" 
-                    alt="<%= values.nombre %>">
-          </div>
-        </div>
-        <button type="submit">Guardar</button>
-      </form>
-  </main>
-  <!--Main content section end-->
-
-  
-  <!--Footer section-->
-  <%- include('../components/general/footer-admin.ejs') %>
-    <!--Footer section end-->
+  <!-- <form
+    action="/admin/productos/<%= values.id %>?_method=PUT"
+    method="post"
+    enctype="multipart/form-data">
     
+    <div>
+      <label for="nombre">Nombre: </label>
+      <input
+        type="text"
+        id="nombre"
+        name="nombre"
+        value="<%= typeof values != 'undefined' ? values.nombre : '' %>"
+        required
+        nimLength="3"
+      />
+    </div>
+    <div>
+      <label for="description">Descripción: </label>
+      <input
+        type="text"
+        id="description"
+        name="description"
+        value="<%= typeof values != 'undefined' ? values.description : '' %>"
+      />
+    </div>
+    <div>
+      <label for="sku">Sku: </label>
+      <input
+        type="text"
+        id="sku"
+        name="sku"
+        value="<%= typeof values != 'undefined' ? values.sku : '' %>"
+      />
+    </div>
+    <div>
+      <label for="precio">Precio: </label>
+      <input
+        type="number"
+        id="precio"
+        name="precio"
+        value="<%= typeof values != 'undefined' ? values.precio : '' %>"
+        required
+        min="1"
+      />
+    </div>
+    <div class="edit-tipo">
+      <label for="imagen">Imagen: </label>
+      <input type="file" id="imagen" name="imagen" accept="image/*" />
+      <div>
+        <img
+          class="img-listado"
+          width="25px"
+          src="/uploads/producto_<%= values.id %>.jpg"
+          alt="<%= values.nombre %>"
+        />
+      </div>
+    </div>
+    <button class="button-mod" type="submit">Guardarlo</button>
+  </form> -->
+
+<!--Main content section end-->
+
+<!--Main MIRKO section-->
+
+  <h1 class="h1-edit">EDITAR ITEM</h1>
+<!-- Este código nos permite imprimir los errores en pantalla en caso que existan -->
+<% if (typeof errors != 'undefined') { %>
+  <ul>
+    <% errors.forEach(error => { %>
+    <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+  <% } %>
+  <!-- Fin impresión errores -->
+
+  <form 
+    action="/admin/productos/<%= values.id %>?_method=PUT"
+    method="post"
+    enctype="multipart/form-data">
+
+    <!-- <div class="edit-tipo">
+      <div>
+        <label for="categoria">Categoría:</label>
+        <select
+          class="edit-valu"
+          style="cursor: pointer"
+          name="category_id"
+          >
+          <option disabled>Seleccionar</option>
+
+          <option value="categoria">Categoría</option>
+        </select>
+      </div>
+
+      <div>
+        <label for="licencia">Licencia:</label>
+        <select
+          class="edit-valu"
+          style="cursor: pointer"
+          name="licence_id"
+        >
+          <option disabled>Seleccionar</option>
+          
+          <option value="licencia">
+            Licencia
+          </option>
+          
+        </select>
+      </div>
+    </div> -->
+
+    <div class="edit-tipo">
+      <label for="nombre-producto">Nombre del producto:</label>
+      <input
+        class="edit-product"
+        id="nombre"
+        name="nombre"
+        value="<%= typeof values != 'undefined' ? values.nombre : '' %>"
+        required
+        nimLength="3"
+      />
+    </div>
+
+    <div class="text-edit">
+      <textarea
+        class="edit-text"
+        type="text"
+        name="description"
+        rows="6"
+        cols="80">
+      <%= typeof values != 'undefined' ? values.description : '' %></textarea>
+    </div>
+
+    <div class="edit-tipo">
+      <div>
+        <label for="sku">SKU:</label>
+        <input
+          class="edit-sps"
+          type="text"
+          id="sku"
+          name="sku"
+          value="<%= typeof values != 'undefined' ? values.sku : '' %>"
+        />
+      </div>
+
+      <div>
+        <label for="precio">Precio:</label>
+        <input
+          class="edit-sps"
+          type="number"
+        id="precio"
+        name="precio"
+        value="<%= typeof values != 'undefined' ? values.precio : '' %>"
+        required
+        min="1"
+        />
+      </div>
+
+      <!-- <div>
+        <label for="stock">Stock:</label>
+        <input
+          class="edit-sps"
+          name="stock"
+          type="text"
+          id="stock"
+          value="<%= typeof collections != 'undefined' ? collections.stock : '' %>"
+        />
+      </div> -->
+    </div>
+
+    <!-- <div class="edit-tipo">
+      <div>
+        <label for="descuento">Descuento:</label>
+        <input
+          class="descuento"
+          name="discount"
+          type="text"
+          id="descuento"
+          value="<%= typeof collections != 'undefined' ? collections.discount : '' %>"
+        />
+      </div>
+
+      <label for="cuotas">Cuotas:</label>
+      <select class="edit-dc" name="cuotas" id="cuotas" required>
+        <option value="numero-cuotas">3 Cuotas sin interés</option>
+        <option value="numero-cuotas">6 Cuotas sin interés</option>
+        <option value="numero-cuotas">12 Cuotas sin interés</option>
+        <option value="dieciOchoCuotas">18 Cuotas sin interes</option>
+        <option value="veintiCuatroCuotas">24 Cuotas sin interes</option>
+      </select>
+    </div> -->
+
+    <div class="edit-tipo">
+            <label for="imagen">Imágenes:</label>
+            <input  type="file" id="imagen" name="imagen" accept="image/*">
+        </div>
+
+    <!-- <label for="image_front" class="label-create">Imagen Principal:</label>
+    <input
+      type="url"
+      name="image_front"
+      id="image_front"
+      value="<%= typeof collections != 'undefined' ? collections.image_front : '' %>"
+      required
+    />
+
+    <label for="image_back" class="label-create">Imagen Secundaria:</label>
+    <input
+      type="url"
+      name="image_back"
+      id="image_back"
+      value="<%= typeof collections != 'undefined' ? collections.image_back : '' %>"
+      required
+    /> -->
+
+    <div class="container-card">
+      <section class="card-edit">
+
+        <div>
+          <!-- <label for="imagen">Imagen: </label>
+          <input type="file" id="imagen" name="imagen" accept="image/*" /> -->
+              <img
+                
+                width="30px"
+                src="/uploads/producto_<%= values.id %>.jpg"
+                alt="<%= values.nombre %>"
+              />
+        </div>
+
+        <p class="p-carga">Frente</p>
+      </section>
+
+      <!-- <section class="card-edit">
+        <img
+          class="img-edit"
+          src="<%= typeof collections != 'undefined' ? collections.image_back : '' %>"
+          alt="Figura coleccionable funko - <%= typeof collections != 'undefined' ? collections.product_name : '' %>"
+        />
+        <p class="p-carga">Dorso</p>
+      </section> -->
+    </div>
+
+    <input
+      class="button-mod"
+      type="submit"
+      style="cursor: pointer"
+      value="Modificar Producto"
+    />
+  </form>
+</main>
+<!--Main Mirko section end-->
+
+<!--Footer section-->
+<%- include('../components/general/footer-admin.ejs') %>
+<!--Footer section end-->

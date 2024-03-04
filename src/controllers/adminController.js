@@ -1,3 +1,4 @@
+const fs = require("fs");
 const path = require("path");
 const sharp = require("sharp");
 
@@ -100,9 +101,34 @@ const update = async (req, res) => {
   }
 };
 
-const destroy = (req, res) => {
+const destroy = async (req, res) => {
     console.log(req.params, req.body);
-    res.send("Producto Borrado");
+    
+    try {
+     const result = await model.destroy({
+        where: {
+          id: req.params.id,
+        },
+      });
+      console.log(result);
+
+      if (result == 1) {
+         fs.unlink(
+          path.resolve(__dirname, 
+            `../../public/uploads/producto_${req.params.id}.jpg`
+            ),
+        (error) => {
+          if (error) {
+            console.log(error);
+          }
+        }
+      );
+    }
+      res.redirect("/admin/productos");
+    } catch (error) {
+      console.log(error);
+      res.status(500).send(error);
+    }
 };
 
 const updateView =(req, res) => {

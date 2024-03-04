@@ -1,77 +1,258 @@
 <!--Header section with NavBar-->
 <%- include('../components/general/header-admin.ejs') %>
-  <!--Header section with NavBar end-->
+<!--Header section with NavBar end-->
 
-  <!--Main content section-->
-  <main>
-    <h1>Crear Producto</h1>
+<!--Main content section-->
+<main>
+  <h1>Crear Producto</h1>
+  <!-- Este código nos permite imprimir los errores en pantalla en caso que existan -->
+  <% if (typeof errors != 'undefined') { %>
+  <ul>
+    <% errors.forEach(error => { %>
+    <li><%= error.msg %></li>
+    <% }) %>
+  </ul>
+  <% } %>
+  <!-- Fin impresión errores -->
+
+  <form action="/admin/productos" method="post" enctype="multipart/form-data">
+    <div>
+      <label for="nombre">Nombre: </label>
+      <input
+        type="text"
+        id="nombre"
+        name="nombre"
+        value="<%= typeof values != 'undefined' ? values.nombre : '' %>"
+        required
+        nimLength="3"
+      />
+    </div>
+    <div>
+      <label for="description">Descripción: </label>
+      <input
+        type="text"
+        id="description"
+        name="description"
+        value="<%= typeof values != 'undefined' ? values.description : '' %>"
+      />
+    </div>
+    <div>
+      <label for="sku">Sku: </label>
+      <input
+        type="text"
+        id="sku"
+        name="sku"
+        value="<%= typeof values != 'undefined' ? values.sku : '' %>"
+      />
+    </div>
+    <div>
+      <label for="precio">Precio: </label>
+      <input
+        type="number"
+        id="precio"
+        name="precio"
+        value="<%= typeof values != 'undefined' ? values.precio : '' %>"
+        required
+        min="1"
+      />
+    </div>
+    <div>
+      <label for="imagen" class="label-create">Imagen: </label>
+      <input type="file" id="imagen" name="imagen" accept="image/*" />
+    </div>
+    <button type="submit">Guardar</button>
+  </form>
+</main>
+<!--Main content section end-->
+
+<!--Main MIRKO section-->
+<main>
+  <section class="create-wrapper container">
+    <h2 class="create-container__title title">CREAR NUEVO ITEM</h2>
+    <div id="container-form">
       <!-- Este código nos permite imprimir los errores en pantalla en caso que existan -->
-      <% if (typeof errors != 'undefined') { %>
-      <ul>
-        <% errors.forEach(error => { %>
-        <li><%= error.msg %></li>
-        <% }) %>
-      </ul>
-      <% } %>
-      <!-- Fin impresión errores -->
+    <% if (typeof errors != 'undefined') { %>
+    <ul>
+    <% errors.forEach(error => { %>
+    <li><%= error.msg %></li>
+    <% }) %>
+    </ul>
+    <% } %>
+    <!-- Fin impresión errores -->
 
       <form
         action="/admin/productos"
         method="post"
         enctype="multipart/form-data"
+        class="container-form__create"
       >
-        <div>
-          <label for="nombre">Nombre: </label>
+        <div class="container-form__fields fields__category-licence">
+          <div>
+            <label for="category" class="label-create">Categoria*:</label>
+            <select
+              id="category"
+              name="category_id"
+              class="select-createItem">
+              <option disabled selected>Seleccionar</option>
+
+              <option value="Licencia">Licencia</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="licence" class="label-create licence">Licencia*:</label>
+            <select
+              id="licence"
+              name="licence_id"
+              class="select-createItem">
+              <option disabled selected>Seleccionar</option>
+              
+              <option value="Categoría">
+                Categoría
+              </option>
+
+            </select>
+          </div>
+        </div>
+
+        <div class="container-form__fields fields__productName">
+          <label for="nombre" class="label-create"
+            >Nombre del producto*:</label
+          >
           <input
             type="text"
             id="nombre"
             name="nombre"
             value="<%= typeof values != 'undefined' ? values.nombre : '' %>"
+            placeholder="Nombre del producto"
+            class="input-create input-create__productName"
             required
-            nimLength="3"
           />
         </div>
-        <div>
-          <label for="description">Descripción: </label>
-          <input
+
+        <div class="container-form__fields">
+          <textarea
             type="text"
             id="description"
             name="description"
             value="<%= typeof values != 'undefined' ? values.description : '' %>"
-          />
+            class="textarea-create"
+            cols="63"
+            rows="10"
+            placeholder="Descripción del producto"
+          ></textarea>
         </div>
-        <div>
-          <label for="sku">Sku: </label>
-          <input
-            type="text"
-            id="sku"
-            name="sku"
-            value="<%= typeof values != 'undefined' ? values.sku : '' %>"
-          />
-        </div>
-        <div>
-          <label for="precio">Precio: </label>
-          <input
+
+        <div class="container-form__fields fields__sku-price-stock">
+          <div>
+            <label for="sku" class="label-create">SKU*:</label>
+            <input
+              type="text"
+              id="sku"
+              name="sku"
+              value="<%= typeof values != 'undefined' ? values.sku : '' %>"
+              placeholder="SSK111AB001"
+              class="input-create input-create__sku"
+              required
+            />
+          </div>
+
+          <div>
+            <label for="price" class="label-create">Precio*:</label>
+            <input
             type="number"
             id="precio"
             name="precio"
             value="<%= typeof values != 'undefined' ? values.precio : '' %>"
-            required
-            min="1"
+              placeholder="$0.000,00"
+              class="input-create input-create__price"
+              min="0"
+              required
+            />
+          </div>
 
-          />
+          <!-- <div>
+            <label for="stock" class="label-create">Stock*:</label>
+            <input
+              id="stock"
+              name="stock"
+              type="number"
+              placeholder="0"
+              class="input-create input-create__stock"
+              min="0"
+            />
+          </div> -->
         </div>
-        <div>
-          <label for="imagen">Imagen: </label>
-          <input type="file" id="imagen" name="imagen" accept="image/*" />
+
+        <div class="container-form__fields fields__discount-cuotas">
+          <!-- <div>
+            <label for="discount" class="label-create">Descuento:</label>
+            <input
+              id="discount"
+              name="discount"
+              type="number"
+              placeholder="0%"
+              min="0"
+              class="input-create input-create__discount"
+            />
+          </div> -->
+
+          <div>
+            <label for="cuotas" class="label-create">Cuotas:</label>
+            <select
+              id="cuotas"
+              name="cuotas"
+              class="select-createItem select-createItem__cuotas"
+            >
+              <option selected>3 Cuotas sin interes</option>
+              <option value="sinCoutas">Sin Cuotas</option>
+              <option value="seisCuotas">6 Cuotas sin interes</option>
+              <option value="doceCuotas">12 Cuotas sin interes</option>
+              <option value="dieciOchoCuotas">18 Cuotas sin interes</option>
+              <option value="veintiCuatroCuotas">24 Cuotas sin interes</option>
+            </select>
+          </div>
         </div>
-        <button type="submit">Guardar</button>
+
+        <div class="container-form__fields fields__images">
+          <div>
+            <label for="imagen" class="label-create"
+              >Imagen Principal*:</label
+            >
+            <input
+              type="file"
+              name="imagen"
+              id="imagen"
+              class="input-create_images"
+              placeholder="Ingrese la url de la imagen"
+              required
+            />
+          </div>
+          <!-- <div>
+            <label for="image_back" class="label-create"
+              >Imagen Secundaria*:</label
+            >
+            <input
+              type="url"
+              name="image_back"
+              id="image_back"
+              class="input-create_images"
+              placeholder="Ingrese la url de la imagen"
+              required
+            />
+          </div> -->
+        </div>
+
+        <div class="container-btns">
+          <button type="submit" class="buttons-create">Agregar Producto</button>
+          <button type="reset" class="buttons-create">Limpiar</button>
+        </div>
       </form>
-  </main>
-  <!--Main content section end-->
+    </div>
+  </section>
+</main>
+<!--Main content section end-->
 
-  
-  <!--Footer section-->
-  <%- include('../components/general/footer-admin.ejs') %>
-    <!--Footer section end-->
-    
+<!--Footer section-->
+<%- include('../components/general/footer-admin.ejs') %>
+<!--Footer section end-->

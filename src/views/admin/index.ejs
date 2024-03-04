@@ -61,7 +61,7 @@
                           <img src="../images/icons/edit_pencil.svg" alt="lapiz">
                         </a>
                       </button>
-                      <form class="form-delete" action="/admin/products/delete/" method="POST">
+                      <form class="form-delete" action="/admin/productos/<%= producto.id %>?_method=DELETE" method="POST">
                         <button type="submit">
                           <img src="../images/icons/delete_trash.svg" alt="basura">
                         </button>
@@ -79,7 +79,19 @@
     </section>
   </main>
   <!--Main content section end-->
-  
+  <script>
+    document.addEventListener("click", (event) => {
+      if (event.target.closest("form").classList.contains("form-delete")) {
+        event.preventDefault();
+
+        const borrar = confirm("Está seguro de querer borrar el producto?");
+        
+        if (borrar) {
+          event.target.closest("form").submit();
+        }
+      }
+    });
+  </script>
   <!--Footer section-->
   <%- include('../components/general/footer-admin.ejs') %>
     <!--Footer section end-->
