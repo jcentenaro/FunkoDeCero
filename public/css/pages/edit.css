@@ -24,7 +24,12 @@
   font-size: var(--font-xsmal);
   border-radius: 5px;
 }
-
+.container-text-edit {
+  width: 100%;
+  font-family: var(--primary-font);
+  font-size: var(--font-medium);
+  padding: var(--spacing-12) 0 0;   
+}
 .edit-product {
   margin-right: var(--spacing-36);
   font-size: var(--font-xsmal);
@@ -34,8 +39,11 @@
 }
 
 .edit-text {
-  font-size: var(--font-large);
   border-radius: 5px;
+  font-family: var(--primary-font);
+  font-size: 1em;
+  padding: var(--spacing-8);
+  max-width: 100%;
 }
 
 .edit-sps {

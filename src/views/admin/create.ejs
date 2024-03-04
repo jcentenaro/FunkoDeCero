@@ -4,73 +4,12 @@
 
 <!--Main content section-->
 <main>
-  <h1>Crear Producto</h1>
-  <!-- Este código nos permite imprimir los errores en pantalla en caso que existan -->
-  <% if (typeof errors != 'undefined') { %>
-  <ul>
-    <% errors.forEach(error => { %>
-    <li><%= error.msg %></li>
-    <% }) %>
-  </ul>
-  <% } %>
-  <!-- Fin impresión errores -->
-
-  <form action="/admin/productos" method="post" enctype="multipart/form-data">
-    <div>
-      <label for="nombre">Nombre: </label>
-      <input
-        type="text"
-        id="nombre"
-        name="nombre"
-        value="<%= typeof values != 'undefined' ? values.nombre : '' %>"
-        required
-        nimLength="3"
-      />
-    </div>
-    <div>
-      <label for="description">Descripción: </label>
-      <input
-        type="text"
-        id="description"
-        name="description"
-        value="<%= typeof values != 'undefined' ? values.description : '' %>"
-      />
-    </div>
-    <div>
-      <label for="sku">Sku: </label>
-      <input
-        type="text"
-        id="sku"
-        name="sku"
-        value="<%= typeof values != 'undefined' ? values.sku : '' %>"
-      />
-    </div>
-    <div>
-      <label for="precio">Precio: </label>
-      <input
-        type="number"
-        id="precio"
-        name="precio"
-        value="<%= typeof values != 'undefined' ? values.precio : '' %>"
-        required
-        min="1"
-      />
-    </div>
-    <div>
-      <label for="imagen" class="label-create">Imagen: </label>
-      <input type="file" id="imagen" name="imagen" accept="image/*" />
-    </div>
-    <button type="submit">Guardar</button>
-  </form>
-</main>
-<!--Main content section end-->
 
 <!--Main MIRKO section-->
-<main>
   <section class="create-wrapper container">
     <h2 class="create-container__title title">CREAR NUEVO ITEM</h2>
     <div id="container-form">
-      <!-- Este código nos permite imprimir los errores en pantalla en caso que existan -->
+    <!-- Este código nos permite imprimir los errores en pantalla en caso que existan -->
     <% if (typeof errors != 'undefined') { %>
     <ul>
     <% errors.forEach(error => { %>
@@ -88,25 +27,17 @@
       >
         <div class="container-form__fields fields__category-licence">
           <div>
-            <label for="category" class="label-create">Categoria*:</label>
-            <select
-              id="category"
-              name="category_id"
-              class="select-createItem">
+            <label for="category" class="label-create">Categoría*:</label>
+            <select id="category" name="category_id" class="select-createItem">
               <option disabled selected>Seleccionar</option>
-
               <option value="Licencia">Licencia</option>
             </select>
           </div>
 
           <div>
             <label for="licence" class="label-create licence">Licencia*:</label>
-            <select
-              id="licence"
-              name="licence_id"
-              class="select-createItem">
+            <select id="licence" name="licence_id" class="select-createItem">
               <option disabled selected>Seleccionar</option>
-              
               <option value="Categoría">
                 Categoría
               </option>
@@ -119,14 +50,7 @@
           <label for="nombre" class="label-create"
             >Nombre del producto*:</label
           >
-          <input
-            type="text"
-            id="nombre"
-            name="nombre"
-            value="<%= typeof values != 'undefined' ? values.nombre : '' %>"
-            placeholder="Nombre del producto"
-            class="input-create input-create__productName"
-            required
+          <input type="text" id="nombre" name="nombre" value="<%= typeof values != 'undefined' ? values.nombre : '' %>" placeholder="Nombre del producto" class="input-create input-create__productName" required
           />
         </div>
 
@@ -171,7 +95,7 @@
             />
           </div>
 
-          <!-- <div>
+          <div>
             <label for="stock" class="label-create">Stock*:</label>
             <input
               id="stock"
@@ -181,7 +105,7 @@
               class="input-create input-create__stock"
               min="0"
             />
-          </div> -->
+          </div>
         </div>
 
         <div class="container-form__fields fields__discount-cuotas">
