@@ -31,23 +31,12 @@ app.use(methodOverride("_method"));
 app.use(express.static(path.join(__dirname, "/public")));
 // Middleware que me permite tomar lo del formulario
 app.use(express.urlencoded({ extended: false}));
+
+app.use(require("./src/routes/authRoutes.js"));
 // Pagína de Inicio + Express Router con modulos
 // AHORA EMPIEZO A MOVER ESTOS MODULOS A LOS mainRoutes SI SON PUBLICOS, O ARMO admRoutes PARA LA ADMINISTRACION INTERNA DE PRODUCTOS LES CAMBIO EL APP POR ROUTER
 // app.get("/", (req, res) => {
 //     res.send("Primera página");
-// });
-// Página de Contacto
-//también la llevo a mainRoutes
-// app.get("/contacto", (req, res) => {
-//     res.send("Contacto");
-// });
-// Página de FAQs
-// app.get("/faqs", (req, res) => {
-//     res.send("Preguntas Frecuentes");
-// });
-// Página Admin
-// app.get("/admin", (req, res) => {
-//     res.send("Administrador de Productos");
 // });
 //PARA PODER MOVER TODO LO DE ARRIBA TUVE QUE DECIRLE DESDE DONDE SE MANEJARÁN ESAS RUTAS
 
