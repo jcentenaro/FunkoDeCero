@@ -2,29 +2,29 @@ const fs = require("fs");
 const path = require("path");
 const sharp = require("sharp");
 
-const {validationResult } = require("express-validator");
+const { validationResult } = require("express-validator");
 
-const model = require("../models/productos");
+const model = require("../models/products");
 
 const index = async (req, res) => {
-    try {
-      const productos = await model.findAll();
-      // console.log(productos);
-      res.render("admin/index", { productos });
-    } catch (error) {
-      console.log(error);
-      res.status(500).send(error);
-    }
+  try {
+    const productos = await model.findAll();
+    // console.log(productos);
+    res.render("admin/index", { productos });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
 };
 
 const createView = (req, res) => {
-    res.render("admin/create");
+  res.render("admin/create");
 };
 
 const store = async (req, res) => {
-    // console.log(req.body, req.file);
+  // console.log(req.body, req.file);
 
-    const errors = validationResult(req);
+  const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
     return res.render("admin/create", {
@@ -39,29 +39,30 @@ const store = async (req, res) => {
 
     if (producto && req.file) {
       sharp(req.file.buffer)
-      .resize({
+        .resize({
           width: 300,
           height: 300,
           fit: sharp.fit.cover,
-          position: sharp.strategy.entropy
+          position: sharp.strategy.entropy,
         })
-      .toFile(path.resolve(__dirname, 
-        `../../public/uploads/producto_${producto.id}.jpg`
-        )
-      );
+        .toFile(
+          path.resolve(
+            __dirname,
+            `../../public/uploads/producto_${producto.id}.jpg`
+          )
+        );
     }
     res.redirect("/admin/productos");
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
   }
-
 };
 
 const update = async (req, res) => {
-    console.log(req.params, req.body);
+  console.log(req.params, req.body);
 
-    const errors = validationResult(req);
+  const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
     return res.render("admin/edit", {
@@ -79,16 +80,18 @@ const update = async (req, res) => {
     if (affected[0] == 1) {
       if (req.file) {
         sharp(req.file.buffer)
-        .resize({
+          .resize({
             width: 300,
             height: 300,
             fit: sharp.fit.cover,
-            position: sharp.strategy.entropy
+            position: sharp.strategy.entropy,
           })
-        .toFile(path.resolve(__dirname, 
-          `../../public/uploads/producto_${req.params.id}.jpg`
-          )
-        );
+          .toFile(
+            path.resolve(
+              __dirname,
+              `../../public/uploads/producto_${req.params.id}.jpg`
+            )
+          );
       }
 
       res.redirect("/admin/productos");
@@ -102,21 +105,22 @@ const update = async (req, res) => {
 };
 
 const destroy = async (req, res) => {
-    console.log(req.params, req.body);
-    
-    try {
-     const result = await model.destroy({
-        where: {
-          id: req.params.id,
-        },
-      });
-      console.log(result);
+  console.log(req.params, req.body);
 
-      if (result == 1) {
-         fs.unlink(
-          path.resolve(__dirname, 
-            `../../public/uploads/producto_${req.params.id}.jpg`
-            ),
+  try {
+    const result = await model.destroy({
+      where: {
+        id: req.params.id,
+      },
+    });
+    console.log(result);
+
+    if (result == 1) {
+      fs.unlink(
+        path.resolve(
+          __dirname,
+          `../../public/uploads/producto_${req.params.id}.jpg`
+        ),
         (error) => {
           if (error) {
             console.log(error);
@@ -124,42 +128,42 @@ const destroy = async (req, res) => {
         }
       );
     }
-      res.redirect("/admin/productos");
-    } catch (error) {
-      console.log(error);
-      res.status(500).send(error);
-    }
+    res.redirect("/admin/productos");
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
 };
 
-const updateView =(req, res) => {
-    res.send("ID GET");
+const updateView = (req, res) => {
+  res.send("ID GET");
 };
 
 const editView = async (req, res) => {
   try {
     const producto = await model.findByPk(req.params.id);
 
-    if(producto) {
+    if (producto) {
       res.render("admin/edit", { values: producto });
     } else {
       res.status(404).send("El Producto no existe");
     }
   } catch (error) {
     console.log(error);
-  }  
+  }
 };
 
 const deleteId = (req, res) => {
-    res.send("ID DELETE");
+  res.send("ID DELETE");
 };
 
 module.exports = {
-    index,
-    store,
-    update,
-    destroy,
-    createView,
-    updateView,
-    editView,
-    deleteId
+  index,
+  store,
+  update,
+  destroy,
+  createView,
+  updateView,
+  editView,
+  deleteId,
 };

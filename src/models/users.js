@@ -29,10 +29,10 @@ const users = sequelize.define("user", {
   });
 // FINAL bcryptjs
 
-  (async () => {
-    await sequelize.sync();
-    // await sequelize.sync({ force: true });
-    // await sequelize.sync({ alter: true });
-  })();
+  // (async () => {
+  //   await sequelize.sync();
+  //   // await sequelize.sync({ force: true });
+  //   // await sequelize.sync({ alter: true });
+  // })();
   
   module.exports = users;

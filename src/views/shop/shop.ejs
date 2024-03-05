@@ -61,18 +61,18 @@
     <!--Show cards with pagination-->
     <div class="item-list-wrapper container">
         <section class="item-list">
-            <% productos.forEach(producto => {  %>
+            <% products.forEach(product => {  %>
             <!--FunkoPop card-->
             <article class="card">
-                <a class="card-link" href="/shop/item/<%= producto.id %>">
+                <a class="card-link" href="/shop/item/<%= product.id %>">
                     <figure class="card-image">
                         <span class="card-image-tag">NUEVO</span>
-                        <img class="card-image__front" src="/uploads/producto_<%= producto.id %>.jpg" alt="<%= producto.nombre %>">
+                        <img class="card-image__front" src="/uploads/producto_<%= product.id %>.jpg" alt="<%= product.nombre %>">
                     </figure>
                     <div class="card-content">
                         <p class="card-content-category">Nombre de la Licencia</p>
-                        <h4 class="card-content-name"><%= producto.nombre %></h4>
-                        <p class="card-content-price">$ <%= producto.precio %>.-</p>
+                        <h4 class="card-content-name"><%= product.nombre %></h4>
+                        <p class="card-content-price">$ <%= product.precio %>.-</p>
                         <p class="card-content-prom">3 CUOTAS SIN INTERÉS</p>
                     </div>
                 </a>

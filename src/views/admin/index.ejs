@@ -43,25 +43,25 @@
               </tr>
               <tr class="prod-list-row">
 
-                <% productos.forEach(producto => {  %> 
-                  <td class="prod-list-row-item row-item-added"><%= producto.id %></td>
-                  <td class="prod-list-row-item row-item-added"><%= producto.sku %></td>
-                  <td class="prod-list-row-item row-item-added"><%= producto.nombre %></td>
+                <% productos.forEach(product => {  %> 
+                  <td class="prod-list-row-item row-item-added"><%= product.id %></td>
+                  <td class="prod-list-row-item row-item-added"><%= product.sku %></td>
+                  <td class="prod-list-row-item row-item-added"><%= product.nombre %></td>
                   <td class="prod-list-row-item row-item-added">
                     <img 
                     class="img-listado"
                     width="30px" 
-                    src="/uploads/producto_<%= producto.id %>.jpg" 
-                    alt="<%= producto.nombre %>">
+                    src="/uploads/producto_<%= product.id %>.jpg" 
+                    alt="<%= product.nombre %>">
                   </td>
                   <td class="prod-list-row-item row-item-added">
                     <div class="row-item-added-icons">
                       <button>
-                        <a href="/admin/productos/<%= producto.id %>/edit/">
+                        <a href="/admin/productos/<%= product.id %>/edit/">
                           <img src="../images/icons/edit_pencil.svg" alt="lapiz">
                         </a>
                       </button>
-                      <form class="form-delete" action="/admin/productos/<%= producto.id %>?_method=DELETE" method="POST">
+                      <form class="form-delete" action="/admin/productos/<%= product.id %>?_method=DELETE" method="POST">
                         <button type="submit">
                           <img src="../images/icons/delete_trash.svg" alt="basura">
                         </button>
