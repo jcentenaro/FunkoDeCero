@@ -85,6 +85,7 @@ app.get("/producto/:id", (req, res) => {
 // app.use(mainRoutes);
 // lo mismo que arriba pero simplificado en una linea
 app.use("/", require("./src/routes/mainRoutes.js"));
+app.use("/admin/categorias", isLogin, require("./src/routes/categoriaRoutes.js"));
 app.use("/admin/productos", isLogin, require("./src/routes/adminRoutes.js"));
 app.use("/shop", require("./src/routes/shopRoutes.js"));
 app.use("/auth", require("./src/routes/authRoutes.js"));
@@ -98,7 +99,7 @@ const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, async () => {
     try {
-        await sequelize.sync();
+        await sequelize.sync({ alter: true });
     } catch (error) {
         console.log(error);
     }

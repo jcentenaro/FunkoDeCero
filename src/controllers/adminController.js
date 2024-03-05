@@ -1,3 +1,4 @@
+// para controlar imiágenes estos 3
 const fs = require("fs");
 const path = require("path");
 const sharp = require("sharp");
@@ -5,20 +6,28 @@ const sharp = require("sharp");
 const { validationResult } = require("express-validator");
 
 const model = require("../models/products");
+const modelCategory = require("../models/category");
 
 const index = async (req, res) => {
   try {
     const productos = await model.findAll();
     // console.log(productos);
-    res.render("admin/index", { productos });
+    res.render("admin/productos/index", { productos });
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
   }
 };
 
-const createView = (req, res) => {
-  res.render("admin/create");
+const createView = async (req, res) => {
+  try {
+    const categorias = await modelCategory.findAll();
+    res.render("admin/productos/create", { categorias });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
+  
 };
 
 const store = async (req, res) => {
@@ -27,10 +36,17 @@ const store = async (req, res) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    return res.render("admin/create", {
-      values: req.body,
-      errors: errors.array(),
-    });
+    try {
+      const categorias = await modelCategory.findAll();
+      return res.render("admin/productos/create", {
+        categorias,
+        values: req.body,
+        errors: errors.array(),
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).send(error);
+    }
   }
 
   try {
@@ -65,8 +81,8 @@ const update = async (req, res) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    return res.render("admin/edit", {
-      values: req.body,
+    return res.render("admin/productos/edit", {
+      values: { ...req.params, ...req.body},
       errors: errors.array(),
     });
   }
@@ -144,12 +160,14 @@ const editView = async (req, res) => {
     const producto = await model.findByPk(req.params.id);
 
     if (producto) {
-      res.render("admin/edit", { values: producto });
+      const categorias = await modelCategory.findAll();
+      res.render("admin/productos/edit", { values: producto, categorias });
     } else {
-      res.status(404).send("El Producto no existe");
+      res.status(404).send("El producto no existe");
     }
   } catch (error) {
     console.log(error);
+    res.status(500).send(error);
   }
 };
 

@@ -2,6 +2,8 @@ const { DataTypes } = require("sequelize");
 
 const sequelize = require("../config/conn");
 
+const category = require("./category");
+
 const products = sequelize.define("products", {
    
   nombre: {
@@ -33,6 +35,8 @@ const products = sequelize.define("products", {
     allowNull: true,
   },
   });
+
+  products.belongsTo(category);
   
   // (async () => {
   //   await sequelize.sync();

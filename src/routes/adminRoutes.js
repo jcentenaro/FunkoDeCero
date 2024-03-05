@@ -1,6 +1,7 @@
 const {Router} = require("express");
 // no hago lo mismo que en app.js sino estaría replicando el server, aca solicito un módulo nativa de express para manejar estas rutas
 const router = Router();
+// Para controlar imágenes
 const multer = require("multer");
 const upload = multer({ storage: multer.memoryStorage() });
 
@@ -18,6 +19,10 @@ const validations = [
         .not()
         .isEmpty()
         .withMessage("El precio es obligatorio"),
+    body("categoryId")
+        .not()
+        .isEmpty()
+        .withMessage("La categoría es obligatoria"),
 ];
 
 const controller = require("../controllers/adminController");

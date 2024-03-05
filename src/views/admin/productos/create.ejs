@@ -1,23 +1,22 @@
 <!--Header section with NavBar-->
-<%- include('../components/general/header-admin.ejs') %>
+<%- include('../../components/general/header-admin.ejs') %>
 <!--Header section with NavBar end-->
 
 <!--Main content section-->
 <main>
-
-<!--Main MIRKO section-->
+  <!--Main MIRKO section-->
   <section class="create-wrapper container">
     <h2 class="create-container__title title">CREAR NUEVO ITEM</h2>
     <div id="container-form">
-    <!-- Este código nos permite imprimir los errores en pantalla en caso que existan -->
-    <% if (typeof errors != 'undefined') { %>
-    <ul>
-    <% errors.forEach(error => { %>
-    <li><%= error.msg %></li>
-    <% }) %>
-    </ul>
-    <% } %>
-    <!-- Fin impresión errores -->
+      <!-- Este código nos permite imprimir los errores en pantalla en caso que existan -->
+      <% if (typeof errors != 'undefined') { %>
+      <ul>
+        <% errors.forEach(error => { %>
+        <li><%= error.msg %></li>
+        <% }) %>
+      </ul>
+      <% } %>
+      <!-- Fin impresión errores -->
 
       <form
         action="/admin/productos"
@@ -27,10 +26,12 @@
       >
         <div class="container-form__fields fields__category-licence">
           <div>
-            <label for="category" class="label-create">Categoría*:</label>
-            <select id="category" name="category_id" class="select-createItem">
+            <label for="categoryId" class="label-create">Categoría*:</label>
+            <select id="categoryId" name="categoryId" class="select-createItem">
               <option disabled selected>Seleccionar</option>
-              <option value="Licencia">Licencia</option>
+              <% categorias.forEach(categoria => { %>
+              <option value="<%= categoria.id %>"><%= categoria.nombre %></option>
+              <% }) %>
             </select>
           </div>
 
@@ -38,19 +39,21 @@
             <label for="licence" class="label-create licence">Licencia*:</label>
             <select id="licence" name="licence_id" class="select-createItem">
               <option disabled selected>Seleccionar</option>
-              <option value="Categoría">
-                Categoría
-              </option>
-
+              <option value="Categoría">Categoría</option>
             </select>
           </div>
         </div>
 
         <div class="container-form__fields fields__productName">
-          <label for="nombre" class="label-create"
-            >Nombre del producto*:</label
-          >
-          <input type="text" id="nombre" name="nombre" value="<%= typeof values != 'undefined' ? values.nombre : '' %>" placeholder="Nombre del producto" class="input-create input-create__productName" required
+          <label for="nombre" class="label-create">Nombre del producto*:</label>
+          <input
+            type="text"
+            id="nombre"
+            name="nombre"
+            value="<%= typeof values != 'undefined' ? values.nombre : '' %>"
+            placeholder="Nombre del producto"
+            class="input-create input-create__productName"
+            required
           />
         </div>
 
@@ -84,10 +87,10 @@
           <div>
             <label for="price" class="label-create">Precio*:</label>
             <input
-            type="number"
-            id="precio"
-            name="precio"
-            value="<%= typeof values != 'undefined' ? values.precio : '' %>"
+              type="number"
+              id="precio"
+              name="precio"
+              value="<%= typeof values != 'undefined' ? values.precio : '' %>"
               placeholder="$0.000,00"
               class="input-create input-create__price"
               min="0"
@@ -140,9 +143,7 @@
 
         <div class="container-form__fields fields__images">
           <div>
-            <label for="imagen" class="label-create"
-              >Imagen Principal*:</label
-            >
+            <label for="imagen" class="label-create">Imagen Principal*:</label>
             <input
               type="file"
               name="imagen"
@@ -178,5 +179,5 @@
 <!--Main content section end-->
 
 <!--Footer section-->
-<%- include('../components/general/footer-admin.ejs') %>
+<%- include('../../components/general/footer-admin.ejs') %>
 <!--Footer section end-->

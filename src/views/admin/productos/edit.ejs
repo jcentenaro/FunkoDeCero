@@ -1,5 +1,5 @@
 <!--Header section with NavBar-->
-<%- include('../components/general/header-admin.ejs') %>
+<%- include('../../components/general/header-admin.ejs') %>
 <!--Header section with NavBar end-->
 
 <!--Main content section-->
@@ -25,11 +25,13 @@
       >
         <div class="edit-tipo">
           <div>
-            <label for="categoria">Categoría:</label>
-            <select class="edit-valu" style="cursor: pointer" name="category_id">
-              <option disabled>Seleccionar</option>
-              <option value="categoria">Categoría</option>
-            </select>
+            <label for="categoryId" class="label-create">Categoría*:</label>
+            <select id="categoryId" name="categoryId" class="select-createItem" required>
+              <option value=""></option>
+              <% categorias.forEach(categoria => { %>
+              <option value="<%= categoria.id %>" <%= categoria.id == values.CategoryId ? "selected" : "" %> ><%= categoria.nombre %></option>
+              <% }) %>
+          </select>
           </div>
 
           <div>
@@ -182,5 +184,5 @@
 <!--Main Mirko section end-->
 
 <!--Footer section-->
-<%- include('../components/general/footer-admin.ejs') %>
+<%- include('../../components/general/footer-admin.ejs') %>
 <!--Footer section end-->

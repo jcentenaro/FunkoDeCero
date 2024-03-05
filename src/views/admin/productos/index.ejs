@@ -1,0 +1,98 @@
+<!--Header section with NavBar-->
+<%- include('../../components/general/header-admin.ejs') %>
+  <!--Header section with NavBar end-->
+
+  <!--Main content section-->
+  <main>
+    <section class="prod-list-wrapper container">
+      <div class="prod-list-search-section">
+        <label class="prod-list-search-icon" for="search">
+          <i class="fa-solid fa-magnifying-glass fa-xl"></i>
+        </label>
+        <input type="text" name="buscar" placeholder="código, nombre o categoria" />
+      </div>
+      <div class="prod-list">
+        <div class="prod-list-title-section">
+          <h1 class="prod-list-title title">LISTADO DE PRODUCTOS</h1>
+          <div class="prod-list-add">
+            <p class="prod-list-add-label">AGREGAR</p>
+            <button class="prod-list-add-button">
+              <a href="/admin/productos/create">
+                <i class="fa-solid fa-plus fa-xl">
+                </i>
+              </a>
+            </button>
+          </div>
+        </div>
+        <div class="prod-list-table-container">
+          <% if (typeof errors != 'undefined') { %>
+            <ul class="req-messages">
+              <% errors.forEach(error => { %>
+              <li class="req-messages__error">ERROR: <%= error.msg %></li>
+              <% }) %>
+            </ul>
+          <% } %>
+          <table class="prod-list-table">
+            <tbody>
+              <tr class="prod-list-row">
+                <th class="prod-list-row-item row-item-title">ID</th>
+                <th class="prod-list-row-item row-item-title">Código</th>
+                <th class="prod-list-row-item row-item-title">Nombre del Producto</th>
+                <th class="prod-list-row-item row-item-title">Imagen</th>
+                <th class="prod-list-row-item row-item-title"></th>
+              </tr>
+              <tr class="prod-list-row">
+
+                <% productos.forEach(product => {  %> 
+                  <td class="prod-list-row-item row-item-added"><%= product.id %></td>
+                  <td class="prod-list-row-item row-item-added"><%= product.sku %></td>
+                  <td class="prod-list-row-item row-item-added"><%= product.nombre %></td>
+                  <td class="prod-list-row-item row-item-added">
+                    <img 
+                    class="img-listado"
+                    width="30px" 
+                    src="/uploads/producto_<%= product.id %>.jpg" 
+                    alt="<%= product.nombre %>">
+                  </td>
+                  <td class="prod-list-row-item row-item-added">
+                    <div class="row-item-added-icons">
+                      <button>
+                        <a href="/admin/productos/<%= product.id %>/edit/">
+                          <img src="../images/icons/edit_pencil.svg" alt="lapiz">
+                        </a>
+                      </button>
+                      <form class="form-delete" action="/admin/productos/<%= product.id %>?_method=DELETE" method="POST">
+                        <button type="submit">
+                          <img src="../images/icons/delete_trash.svg" alt="basura">
+                        </button>
+                      </form>
+                    </div>
+                  </td>
+                  <% }) %>
+               
+
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+  </main>
+  <!--Main content section end-->
+  <script>
+    document.addEventListener("click", (event) => {
+      if (event.target.closest("form").classList.contains("form-delete")) {
+        event.preventDefault();
+
+        const borrar = confirm("Está seguro de querer borrar el producto?");
+        
+        if (borrar) {
+          event.target.closest("form").submit();
+        }
+      }
+    });
+  </script>
+  <!--Footer section-->
+  <%- include('../../components/general/footer-admin.ejs') %>
+    <!--Footer section end-->
+    
