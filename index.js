@@ -42,7 +42,7 @@ const sequelize = require("./src/config/conn.js");
 // Motor de vistas
 app.set("view engine", "ejs");
 //Ahora le digo en donde van a estar las vistas
-app.set("views", "./src/views");
+app.set("views", path.join(__dirname, "/src/views"));
 
 //Pido que use express-layouts
 // app.use(expressLayouts);
