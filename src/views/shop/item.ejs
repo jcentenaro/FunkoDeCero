@@ -2,50 +2,53 @@
 <%- include('../components/general/header.ejs') %>
 <!--Header section with NavBar end-->
 
-
-    <!--Main content section-->
-    <main>
-        <!--Item content section-->
-        <section class="article-products container">
-          <!-- Este código nos permite imprimir los errores en pantalla en caso que existan -->
-      <% if (typeof errors != 'undefined') { %>
-        <ul>
-          <% errors.forEach(error => { %>
-          <li><%= error.msg %></li>
-          <% }) %>
-        </ul>
-        <% } %>
-        <!-- Fin impresión errores -->
-          <article class="products">
-            <picture class="products-image">
-              <img class="centrar" src="" alt="imagen de producto">
-            </picture>
-            <div class="products-content">
-              <p class="products-collection-title">Nombre de la Licencia</p>
-              <h3 class="products-title title"><%= producto.nombre %></h3>
-              <p class="products-text"> Figura coleccionable de NOMBRE_PRODUCTO</p>
-              <h3 class="products-price">&#36; PRECIO</h3>
-              <div class="products-buttons-adder">
-                <div class="cart-item-input input-box">
-                  <input type="text" name="quantity" id="quantity" placeholder="0">
-                  <div class="products-buttons-wrapper-adder input-box-buttons">
-                    <button id="add">+</button>
-                    <button id="subtrack">-</button>
-                  </div>
-                </div>
-                <input type="button" name="Agregar a Carrito" value="Agregar a Carrito">
-              </div>
-              <span style="color: #1d84b5">
-                <a href="/">Ver métodos de pago</a> - 3 CUOTAS SIN INTERÉS
-              </span>
+<!--Main content section-->
+<main>
+  <!--Item content section-->
+  <section class="article-products container">
+    <!-- Este código nos permite imprimir los errores en pantalla en caso que existan -->
+    <% if (typeof errors != 'undefined') { %>
+    <ul>
+      <% errors.forEach(error => { %>
+      <li><%= error.msg %></li>
+      <% }) %>
+    </ul>
+    <% } %>
+    <!-- Fin impresión errores -->
+    <article class="products">
+      <picture class="products-image">
+        <img class="centrar" src="" alt="nombre_del_producto" />
+      </picture>
+      <div class="products-content">
+        <p class="products-collection-title">categoría_desde_BD</p>
+        <h3 class="products-title title">nombre_del_producto</h3>
+        <p class="products-text">
+          Figura coleccionable de nombre_del_producto
+        </p>
+        <h3 class="products-price">&#36; precio_del_producto</h3>
+        <div class="products-buttons-adder">
+          <div class="cart-item-input input-box">
+            <input type="text" name="quantity" id="quantity" placeholder="0" />
+            <div class="products-buttons-wrapper-adder input-box-buttons">
+              <button id="add">+</button>
+              <button id="subtrack">-</button>
             </div>
-          </article>
-        </section>
-        <!--Item content section end-->
-  
-          
-      </main>
-      <!--Main content section end-->
+          </div>
+          <input
+            type="button"
+            name="Agregar a Carrito"
+            value="Agregar a Carrito"
+          />
+        </div>
+        <span style="color: #1d84b5">
+          <a href="/">Ver métodos de pago</a> - 3 CUOTAS SIN INTERÉS
+        </span>
+      </div>
+    </article>
+  </section>
+  <!--Item content section end-->
+</main>
+<!--Main content section end-->
 
 <!--Footer section-->
 <%- include('../components/general/footer.ejs') %>
