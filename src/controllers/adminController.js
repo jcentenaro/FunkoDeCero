@@ -132,6 +132,13 @@ const destroy = async (req, res) => {
     console.log(result);
 
     if (result == 1) {
+      if(fs.existsSync(
+        path.resolve(
+          __dirname,
+          `../../public/uploads/producto_${req.params.id}.jpg`
+        )
+      )
+    ) {
       fs.unlink(
         path.resolve(
           __dirname,
@@ -142,7 +149,8 @@ const destroy = async (req, res) => {
             console.log(error);
           }
         }
-      );
+        );
+      }
     }
     res.redirect("/admin/productos");
   } catch (error) {
