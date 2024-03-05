@@ -49,15 +49,15 @@ const loginValidations = [
   body("email")
     .isEmail()
     .withMessage("Ingrese una dirección de correo electrónico válida"),
-  body("password")
-    .isStrongPassword({
-      minLength: 6,
-      minLowercase: 1,
-      minUppercase: 1,
-      minSymbols: 1,
-      minNumbers: 1,
-    })
-    .withMessage("La contraseña debe tener ..."),
+  // body("password")
+  //   .isStrongPassword({
+  //     minLength: 6,
+  //     minLowercase: 1,
+  //     minUppercase: 1,
+  //     minSymbols: 1,
+  //     minNumbers: 1,
+  //   })
+  //   .withMessage("La contraseña debe tener ..."),
 ];
 
 const controller = require("../controllers/authController");
@@ -66,7 +66,7 @@ router.get("/register", controller.register);
 router.post("/register", registerValidations, controller.postRegister);
 
 router.get("/login", controller.login);
-router.post("/login", controller.postLogin);
+router.post("/login", loginValidations, controller.postLogin);
 
 router.get("/logout", controller.logout);
 

@@ -119,12 +119,18 @@
     #section-register__person{
         gap: 5px;
     }
-    
+
     .register__subtitle{
         font-size: var(--font-medium-l);
         text-align: center;
     }
-
+    .register__title {
+        font-size: 24px;
+        text-align: center;
+    }
+    .label-register {
+        font-size: 15px;
+    }
     .container--labelsAndInputs{
         display: grid;
         grid-template-columns: 1fr 1.2fr;

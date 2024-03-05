@@ -10,7 +10,7 @@ const faqs =(req, res) => {
     res.render("faqs");
 };
 const us = (req, res) => {
-    res.send("Nosotros");
+    res.render("nosotros");
 };
 
 module.exports = {

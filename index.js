@@ -12,6 +12,32 @@ const path = require("path");
 // });
 //instalo npm i override para que el form pueda simular un PUT o DELETE. Y lo llamo
 const methodOverride = require("method-override");
+// con esto guardo las sesiones una vez que me logueé
+// const session = require("express-session");
+// app.use(
+//     session({
+//         secret: "S3cr3t01",
+//         resave: false,
+//         saveUninitialized: false,
+//     })
+// );
+//usamos npm i cookie-session
+const session = require("cookie-session");
+app.use(
+    session({
+        keys: ["Sasdf345lKl309hhb3", "S3cre3t02"],
+    })
+);
+
+
+// ahora chequeo si existet la sesión
+const isLogin = (req, res, next) => {
+    if (!req.session.userId) {
+        return res.redirect("/login");
+    }
+    next();
+};
+
 const sequelize = require("./src/config/conn.js");
 // Motor de vistas
 app.set("view engine", "ejs");
@@ -59,7 +85,7 @@ app.get("/producto/:id", (req, res) => {
 // app.use(mainRoutes);
 // lo mismo que arriba pero simplificado en una linea
 app.use("/", require("./src/routes/mainRoutes.js"));
-app.use("/admin/productos", require("./src/routes/adminRoutes.js"));
+app.use("/admin/productos", isLogin, require("./src/routes/adminRoutes.js"));
 app.use("/shop", require("./src/routes/shopRoutes.js"));
 app.use("/auth", require("./src/routes/authRoutes.js"));
 
