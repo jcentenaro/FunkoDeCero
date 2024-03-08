@@ -1,4 +1,4 @@
-// para controlar imiágenes estos 3
+// para controlar imágenes estos 3
 const fs = require("fs");
 const path = require("path");
 const sharp = require("sharp");
@@ -81,10 +81,17 @@ const update = async (req, res) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    return res.render("admin/productos/edit", {
-      values: { ...req.params, ...req.body},
-      errors: errors.array(),
-    });
+    try {
+      const categorias = await modelCategory.findAll();
+      return res.render("admin/productos/edit", {
+        categorias,
+        values: { ...req.params, ...req.body },
+        error: errors.array(),
+      });
+    } catch (error) {
+      console.log(error);
+      res.status(500).send(error);
+    }
   }
 
   try {

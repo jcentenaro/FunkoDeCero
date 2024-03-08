@@ -61,7 +61,7 @@ const update = async (req, res) => {
     if (affected[0] == 1) {
       res.redirect("/admin/categorias");
     } else {
-      res.status(500).send("Error al actualizar");
+      res.status(500).send("Error al actualizar el categoria");
     }
   } catch (error) {
     console.log(error);
@@ -97,10 +97,11 @@ const editView = async (req, res) => {
     if (categoria) {
       res.render("admin/categorias/edit", { values: categoria });
     } else {
-      res.status(404).send("El Producto no existe");
+      res.status(404).send("El categoria no existe");
     }
   } catch (error) {
     console.log(error);
+    res.status(500).send(error);
   }
 };
 

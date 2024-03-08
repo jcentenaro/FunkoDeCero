@@ -26,10 +26,10 @@
         <div class="edit-tipo">
           <div>
             <label for="categoryId" class="label-create">Categoría*:</label>
-            <select id="categoryId" name="categoryId" class="select-createItem" required>
+            <select id="categoryId" name="categoryId" class="select-createItem">
               <option value=""></option>
               <% categorias.forEach(categoria => { %>
-              <option value="<%= categoria.id %>" <%= categoria.id == values.CategoryId ? "selected" : "" %> ><%= categoria.nombre %></option>
+              <option value="<%= categoria.id %>" <%= categoria.id == values.categoryId ? "selected" : "" %> ><%= categoria.nombre %></option>
               <% }) %>
           </select>
           </div>

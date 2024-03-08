@@ -19,18 +19,6 @@ const shopView = async (req, res) => {
   }
 };
 
-// const idView = async (req, res) => {
-//   const products = await data.getAllProducts();
-//   const id = req.params.id;
-//   const productById = await data.getProductById(id);
-//   console.log(productById);
-//   res.render("shop/item", {
-//     view: {
-//       title: "Item | Funkoshop"
-//     },
-//     products: products.data,
-//     productById: productById.data
-// })};
 
 const idView = (req, res) => {
   res.render("shop/item");
@@ -41,7 +29,7 @@ const itemView = (req, res) => {
 };
 
 const cartView = (req, res) => {
-  res.send("Cart GET");
+  res.render("shop/cart");
 };
 const checkoutView = (req, res) => {
   res.send("Cart POST");
