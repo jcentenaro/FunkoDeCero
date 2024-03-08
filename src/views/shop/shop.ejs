@@ -70,7 +70,7 @@
                         <img class="card-image__front" src="/uploads/producto_<%= product.id %>.jpg" alt="<%= product.nombre %>">
                     </figure>
                     <div class="card-content">
-                        <p class="card-content-category">Nombre de la Licencia</p>
+                        <p class="card-content-category"><%= product.categoryId %></p>
                         <h4 class="card-content-name"><%= product.nombre %></h4>
                         <p class="card-content-price">$ <%= product.precio %>.-</p>
                         <p class="card-content-prom">3 CUOTAS SIN INTERÉS</p>
@@ -98,7 +98,9 @@
     <!--Show cards with pagination end-->   
 </main>
 
-
+<!--Slider section-->
+<%- include('../components/partials/slider.ejs') %>
+<!--Slider section end-->
 
 <!--Footer section-->
 <%- include('../components/general/footer.ejs') %>
