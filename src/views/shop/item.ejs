@@ -17,15 +17,16 @@
     <!-- Fin impresión errores -->
     <article class="products">
       <picture class="products-image">
-        <img class="centrar" src="" alt="nombre_del_producto" />
+        <img class="centrar" src="/public/uploads/producto_<%= values.id%>.jpg" alt="<%= values.nombre%>" />
       </picture>
       <div class="products-content">
-        <p class="products-collection-title">categoría_desde_BD</p>
-        <h3 class="products-title title">nombre_del_producto</h3>
+        
+        <p class="products-collection-title"><%= values.categoryId %></p>
+        <h3 class="products-title title"><nombre_del_producto></h3>
         <p class="products-text">
-          Figura coleccionable de nombre_del_producto
+          Figura coleccionable de <%= values.nombre %>
         </p>
-        <h3 class="products-price">&#36; precio_del_producto</h3>
+        <h3 class="products-price">&#36; <%= values.precio %></h3>
         <div class="products-buttons-adder">
           <div class="cart-item-input input-box">
             <input type="text" name="quantity" id="quantity" placeholder="0" />
@@ -43,6 +44,7 @@
         <span style="color: #1d84b5">
           <a href="/">Ver métodos de pago</a> - 3 CUOTAS SIN INTERÉS
         </span>
+    
       </div>
     </article>
   </section>

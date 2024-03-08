@@ -103,6 +103,7 @@
             <input
               id="stock"
               name="stock"
+              value="<%= typeof values != 'undefined' ? values.stock : '' %>""
               type="number"
               placeholder="0"
               class="input-create input-create__stock"
@@ -149,7 +150,6 @@
               name="imagen"
               id="imagen"
               class="input-create_images"
-              placeholder="Ingrese la url de la imagen"
               required
             />
           </div>

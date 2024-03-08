@@ -20,8 +20,19 @@ const shopView = async (req, res) => {
 };
 
 
-const idView = (req, res) => {
-  res.render("shop/item");
+const idView = async (req, res) => {
+  try {
+    const product = await model.findByPk(req.params.id);
+
+    if (product) {
+      res.render("shop/item", { values: product });
+    } else {
+      res.status(404).send("El producto no existe");
+    }
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
 };
 
 const itemView = (req, res) => {
