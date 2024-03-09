@@ -17,16 +17,16 @@
     <!-- Fin impresión errores -->
     <article class="products">
       <picture class="products-image">
-        <img class="centrar" src="/public/uploads/producto_<%= values.id%>.webp" alt="<%= values.nombre%>" />
+        <img class="centrar" src="/uploads/producto_<%= values.id%>.webp" alt="<%= values.nombre%>" />
       </picture>
       <div class="products-content">
         
         <p class="products-collection-title"><%= values.categoryId %></p>
-        <h3 class="products-title title"><nombre_del_producto></h3>
+        <h3 class="products-title title" style="color: rgb(82, 82, 82);text-decoration: underline;"><%= values.nombre %></h3>
         <p class="products-text">
-          Figura coleccionable de <%= values.nombre %> en caja con ventana de exposición. Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, voluptatum.
+          Coleccionable de <%= values.nombre %> en caja con ventana de exposición. Lorem ipsum dolor sit amet consectetur adipisicing elit. Obcaecati, voluptatum.
         </p>
-        <h3 class="products-price">&#36; <%= values.precio %></h3>
+        <h3 class="products-price">&#36; <%= values.precio %>.-</h3>
         <div class="products-buttons-adder">
           <div class="cart-item-input input-box">
             <input type="text" name="quantity" id="quantity" placeholder="0" />
