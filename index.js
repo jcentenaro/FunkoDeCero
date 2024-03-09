@@ -92,7 +92,8 @@ app.use("/auth", require("./src/routes/authRoutes.js"));
 
 // Manejo de errores
 app.use((req, res, next) => {
-    res.status(404).send("La Página no existe");
+    res.status(404).send("La página que estás solicitando no existe.");
+    //res.status(404).render("404");
 });
 
 const PORT = process.env.PORT || 3000;
