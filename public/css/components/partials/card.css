@@ -54,13 +54,13 @@
     display: none;
 }
 
-.card-image:hover .card-image__back{
+/* .card-image:hover .card-image__back{
     display: block;
-}
+} */
 
-.card-image:hover .card-image__front{
+/* .card-image:hover .card-image__front{
     display: none;
-}
+} */
 
 /* Card style end */
 
