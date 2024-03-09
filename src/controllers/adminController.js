@@ -64,7 +64,7 @@ const store = async (req, res) => {
         .toFile(
           path.resolve(
             __dirname,
-            `../../public/uploads/producto_${producto.id}.jpg`
+            `../../public/uploads/producto_${producto.id}.webp`
           )
         );
     }
@@ -112,7 +112,7 @@ const update = async (req, res) => {
           .toFile(
             path.resolve(
               __dirname,
-              `../../public/uploads/producto_${req.params.id}.jpg`
+              `../../public/uploads/producto_${req.params.id}.webp`
             )
           );
       }
@@ -142,14 +142,14 @@ const destroy = async (req, res) => {
       if(fs.existsSync(
         path.resolve(
           __dirname,
-          `../../public/uploads/producto_${req.params.id}.jpg`
+          `../../public/uploads/producto_${req.params.id}.webp`
         )
       )
     ) {
       fs.unlink(
         path.resolve(
           __dirname,
-          `../../public/uploads/producto_${req.params.id}.jpg`
+          `../../public/uploads/producto_${req.params.id}.webp`
         ),
         (error) => {
           if (error) {
