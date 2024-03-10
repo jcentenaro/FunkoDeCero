@@ -23,7 +23,7 @@ const shopView = async (req, res) => {
 const idView = async (req, res) => {
   try {
     const product = await model.findByPk(req.params.id);
-
+    // console.log(productos);
     if (product) {
       res.render("shop/item", { values: product });
     } else {
