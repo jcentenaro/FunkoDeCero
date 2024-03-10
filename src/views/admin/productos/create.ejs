@@ -6,7 +6,7 @@
 <main>
   <!--Main MIRKO section-->
   <section class="create-wrapper container">
-    <h2 class="create-container__title title">CREAR NUEVO ITEM</h2>
+    <h2 class="create-container__title title">CREAR NUEVO PRODUCTO</h2>
     <div id="container-form">
       <!-- Este código nos permite imprimir los errores en pantalla en caso que existan -->
       <% if (typeof errors != 'undefined') { %>
@@ -36,10 +36,12 @@
           </div>
 
           <div>
-            <label for="licence" class="label-create licence">Licencia*:</label>
-            <select id="licence" name="licence_id" class="select-createItem">
+            <label for="licence_id" class="label-create licence">Licencia*:</label>
+            <select id="licence_id" name="licence_id" class="select-createItem">
               <option disabled selected>Seleccionar</option>
-              <option value="Categoría">Categoría</option>
+              <% licencias.forEach(licencia => { %>
+              <option value="<%= licencia.id %>"><%= licencia.nombre %></option>
+              <% }) %>
             </select>
           </div>
         </div>
@@ -64,8 +66,8 @@
             name="description"
             value="<%= typeof values != 'undefined' ? values.description : '' %>"
             class="textarea-create"
-            cols="63"
-            rows="10"
+            cols="60"
+            rows="5"
             placeholder="Descripción del producto"
           ></textarea>
         </div>

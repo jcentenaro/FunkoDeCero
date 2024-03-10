@@ -7,6 +7,7 @@ const { validationResult } = require("express-validator");
 
 const model = require("../models/products");
 const modelCategory = require("../models/category");
+const modelLicence = require("../models/licence");
 
 const index = async (req, res) => {
   try {
@@ -22,7 +23,8 @@ const index = async (req, res) => {
 const createView = async (req, res) => {
   try {
     const categorias = await modelCategory.findAll();
-    res.render("admin/productos/create", { categorias });
+    const licencias = await modelLicence.findAll();
+    res.render("admin/productos/create", { categorias, licencias });
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
@@ -38,8 +40,10 @@ const store = async (req, res) => {
   if (!errors.isEmpty()) {
     try {
       const categorias = await modelCategory.findAll();
+      const licencias = await modelLicence.findAll();
       return res.render("admin/productos/create", {
         categorias,
+        licencias,
         values: req.body,
         errors: errors.array(),
       });
@@ -83,8 +87,9 @@ const update = async (req, res) => {
   if (!errors.isEmpty()) {
     try {
       const categorias = await modelCategory.findAll();
+      const licencias = await modelLicence.findAll();
       return res.render("admin/productos/edit", {
-        categorias,
+        categorias, licencias,
         values: { ...req.params, ...req.body },
         error: errors.array(),
       });
@@ -176,7 +181,8 @@ const editView = async (req, res) => {
 
     if (producto) {
       const categorias = await modelCategory.findAll();
-      res.render("admin/productos/edit", { values: producto, categorias });
+      const licencias = await modelLicence.findAll();
+      res.render("admin/productos/edit", { values: producto, categorias, licencias });
     } else {
       res.status(404).send("El producto no existe");
     }

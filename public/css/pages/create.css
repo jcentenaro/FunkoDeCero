@@ -81,7 +81,6 @@
 
 .fields__images input {
     padding: .4em .2em;
-    border: 1px solid var(--dark-background-solid);
     border-radius: 2px;
 }
 
@@ -96,6 +95,7 @@
 .textarea-create {
     font-family: var(--primary-font);
     font-size: 1em;
+    border-radius: 5px;
     padding: var(--spacing-8);
     max-width: 100%;
 }

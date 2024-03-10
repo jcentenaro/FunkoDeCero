@@ -1,12 +1,12 @@
 const { validationResult } = require("express-validator");
 
-const model = require("../models/category");
+const model = require("../models/licence");
 
 const index = async (req, res) => {
   try {
-    const categorias = await model.findAll();
-    // console.log(categorias);
-    res.render("admin/categorias/index", { categorias });
+    const licencias = await model.findAll();
+    console.log(licencias);
+    res.render("admin/licencias/index", { licencias });
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
@@ -14,7 +14,7 @@ const index = async (req, res) => {
 };
 
 const createView = (req, res) => {
-  res.render("admin/categorias/create");
+  res.render("admin/licencias/create");
 };
 
 const store = async (req, res) => {
@@ -23,17 +23,17 @@ const store = async (req, res) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    return res.render("admin/categorias/create", {
+    return res.render("admin/licencias/create", {
       values: req.body,
       errors: errors.array(),
     });
   }
 
   try {
-    const categoria = await model.create(req.body);
-    // console.log(categoria);
+    const licencia = await model.create(req.body);
+    // console.log(licencia);
 
-    res.redirect("/admin/categorias");
+    res.redirect("/admin/licencias");
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
@@ -42,12 +42,12 @@ const store = async (req, res) => {
 
 const editView = async (req, res) => {
   try {
-    const categoria = await model.findByPk(req.params.id);
+    const licencia = await model.findByPk(req.params.id);
 
-    if (categoria) {
-      res.render("admin/categorias/edit", { values: categoria });
+    if (licencia) {
+      res.render("admin/licencias/edit", { values: licencia });
     } else {
-      res.status(404).send("El categoria no existe");
+      res.status(404).send("La licencia no existe");
     }
   } catch (error) {
     console.log(error);
@@ -61,7 +61,7 @@ const update = async (req, res) => {
   const errors = validationResult(req);
 
   if (!errors.isEmpty()) {
-    return res.render("admin/categorias/edit", {
+    return res.render("admin/licencias/edit", {
       values: { ...req.params, ...req.body},
       errors: errors.array(),
     });
@@ -73,10 +73,11 @@ const update = async (req, res) => {
         id: req.params.id,
       },
     });
+
     if (affected[0] == 1) {
-      res.redirect("/admin/categorias");
+      res.redirect("/admin/licencias");
     } else {
-      res.status(500).send("Error al actualizar el categoria");
+      res.status(500).send("Error al actualizar el licencia");
     }
   } catch (error) {
     console.log(error);
@@ -94,7 +95,8 @@ const destroy = async (req, res) => {
       },
     });
     console.log(result);
-    res.redirect("/admin/categorias");
+
+    res.redirect("/admin/licencias");
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
