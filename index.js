@@ -101,8 +101,8 @@ const PORT = process.env.PORT || 3000;
 
 app.listen(PORT, async () => {
     try {
-        await sequelize.sync({ alter: true });
-        // await sequelize.sync();
+        // await sequelize.sync({ alter: true });
+        await sequelize.sync();
     } catch (error) {
         console.log(error);
     }

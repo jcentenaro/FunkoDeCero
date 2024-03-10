@@ -19,7 +19,7 @@ const validations = [
         .not()
         .isEmpty()
         .withMessage("El precio es obligatorio"),
-    body("categoryId")
+        body("categoryId")
         .not()
         .isEmpty()
         .withMessage("La categoría es obligatoria"),

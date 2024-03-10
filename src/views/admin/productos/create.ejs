@@ -27,7 +27,7 @@
         <div class="container-form__fields fields__category-licence">
           <div>
             <label for="categoryId" class="label-create">Categoría*:</label>
-            <select id="categoryId" name="categoryId" class="select-createItem">
+            <select id="categoryId" name="categoryId" class="select-createItem" required>
               <option disabled selected>Seleccionar</option>
               <% categorias.forEach(categoria => { %>
               <option value="<%= categoria.id %>"><%= categoria.nombre %></option>
@@ -37,7 +37,7 @@
 
           <div>
             <label for="licence_id" class="label-create licence">Licencia*:</label>
-            <select id="licence_id" name="licence_id" class="select-createItem">
+            <select id="licence_id" name="licence_id" class="select-createItem" required>
               <option disabled selected>Seleccionar</option>
               <% licencias.forEach(licencia => { %>
               <option value="<%= licencia.id %>"><%= licencia.nombre %></option>
