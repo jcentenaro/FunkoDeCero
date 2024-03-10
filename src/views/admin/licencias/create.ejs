@@ -1,0 +1,48 @@
+<!--Header section with NavBar-->
+<%- include('../../components/general/header-admin.ejs') %>
+<!--Header section with NavBar end-->
+
+<!--Main content section-->
+<main>
+
+<!--Main MIRKO section-->
+  <section class="create-wrapper container">
+    <h2 class="create-container__title title">CREAR NUEVA LICENCIA</h2>
+    <div id="container-form">
+    <!-- Este código nos permite imprimir los errores en pantalla en caso que existan -->
+    <% if (typeof errors != 'undefined') { %>
+    <ul>
+    <% errors.forEach(error => { %>
+    <li><%= error.msg %></li>
+    <% }) %>
+    </ul>
+    <% } %>
+    <!-- Fin impresión errores -->
+
+      <form
+        action="/admin/licencias"
+        method="post"
+        class="container-form__create"
+      >
+
+        <div class="container-form__fields fields__productName">
+          <label for="nombre" class="label-create"
+            >Nombre de la licencia*:</label
+          >
+          <input type="text" id="nombre" name="nombre" value="<%= typeof values != 'undefined' ? values.nombre : '' %>" placeholder="Nombre de la categoría" class="input-create input-create__productName" required
+          />
+        </div>
+
+        <div class="container-btns">
+          <button type="submit" class="buttons-create">Agregar LICENCIA</button>
+          <button type="reset" class="buttons-create">Limpiar</button>
+        </div>
+      </form>
+    </div>
+  </section>
+</main>
+<!--Main content section end-->
+
+<!--Footer section-->
+<%- include('../../components/general/footer-admin.ejs') %>
+<!--Footer section end-->

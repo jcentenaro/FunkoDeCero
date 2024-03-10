@@ -34,12 +34,23 @@
           <li class="navbar-item with-submenu">
             <a class="navbar-link" href="/shop">TIENDA</a>
           </li>
-          <li class="navbar-item contact">
-            <a class="navbar-link" href="/admin/productos">PRODUCTOS</a>
-          </li>
-          <li class="navbar-item contact">
-            <a class="navbar-link" href="/admin/categorias">CATEGORIAS</a>
-          </li>
+          <li class="navbar-item with-submenu">
+            <div class="navbar-link-shop with-icon">
+                <a class="navbar-link with-icon" href="/admin/productos">ADMIN</a>
+                <i class="fa-solid fa-chevron-down"></i>
+            </div>
+            <ul class="submenu">
+                <li class="submenu-item">
+                    <a href="/admin/productos">Productos</a>
+                </li>
+                <li class="submenu-item">
+                    <a href="/admin/categorias">Categorías</a>
+                </li>
+                <li class="submenu-item">
+                    <a href="/admin/licencias">Licencias</a>
+                </li>
+            </ul>
+        </li>
           <li class="navbar-item contact">
             <a class="navbar-link" href="/auth/register">REGISTRO</a>
           </li>

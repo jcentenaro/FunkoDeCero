@@ -9,15 +9,15 @@
         <label class="prod-list-search-icon" for="search">
           <i class="fa-solid fa-magnifying-glass fa-xl"></i>
         </label>
-        <input type="text" name="buscar" placeholder="código, nombre o categoria" />
+        <input type="text" name="buscar" placeholder="código, nombre o licencia" />
       </div>
       <div class="prod-list">
         <div class="prod-list-title-section">
-          <h1 class="prod-list-title title">LISTADO DE CATEGORÍAS</h1>
+          <h1 class="prod-list-title title">LISTADO DE LICENCIAS</h1>
           <div class="prod-list-add">
             <p class="prod-list-add-label">AGREGAR</p>
             <button class="prod-list-add-button">
-              <a href="/admin/categorias/create">
+              <a href="/admin/licencias/create">
                 <i class="fa-solid fa-plus fa-xl">
                 </i>
               </a>
@@ -36,26 +36,26 @@
             <tbody>
               <tr class="prod-list-row">
                 <th class="prod-list-row-item row-item-title">ID</th>
-                <th class="prod-list-row-item row-item-title">Nombre del categoria</th>
+                <th class="prod-list-row-item row-item-title">Nombre del licencia</th>
                 <th class="prod-list-row-item row-item-title"></th>
                 <th class="prod-list-row-item row-item-title"></th>
                 <th class="prod-list-row-item row-item-title"></th>
               </tr>
               <tr class="prod-list-row">
 
-                <% categorias.forEach(categoria => {  %> 
-                  <td class="prod-list-row-item row-item-added"><%= categoria.id %></td>
-                  <td class="prod-list-row-item row-item-added"><%= categoria.nombre %></td>
+                <% licencias.forEach(licencia => {  %> 
+                  <td class="prod-list-row-item row-item-added"><%= licencia.id %></td>
+                  <td class="prod-list-row-item row-item-added"><%= licencia.nombre %></td>
                   <td class="prod-list-row-item row-item-added"></td>
                   <td class="prod-list-row-item row-item-added"></td>
                   <td class="prod-list-row-item row-item-added">
                     <div class="row-item-added-icons">
                       <button>
-                        <a href="/admin/categorias/<%= categoria.id %>/edit/">
+                        <a href="/admin/licencias/<%= licencia.id %>/edit/">
                           <img src="../images/icons/edit_pencil.svg" alt="lapiz">
                         </a>
                       </button>
-                      <form class="form-delete" action="/admin/categorias/<%= categoria.id %>?_method=DELETE" method="POST">
+                      <form class="form-delete" action="/admin/licencias/<%= licencia.id %>?_method=DELETE" method="POST">
                         <button type="submit">
                           <img src="../images/icons/delete_trash.svg" alt="basura">
                         </button>
@@ -78,7 +78,7 @@
       if (event.target.closest("form").classList.contains("form-delete")) {
         event.preventDefault();
 
-        const borrar = confirm("Está seguro de querer borrar el categoria?");
+        const borrar = confirm("Está seguro de querer borrar la licencia?");
         
         if (borrar) {
           event.target.closest("form").submit();

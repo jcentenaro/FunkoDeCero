@@ -34,7 +34,7 @@
   margin-right: var(--spacing-36);
   font-size: var(--font-xsmal);
   border: none;
-  border-bottom: 2px solid #ff3333;
+  border-bottom: 3px solid #ff3333;
   outline: none;
 }
 
@@ -50,7 +50,7 @@
   font-size: var(--font-xsmal);
   margin-right: var(--spacing-36);
   border: none;
-  border-bottom: 2px solid #ff3333;
+  border-bottom: 3px solid #ff3333;
   outline: none;
 }
 
@@ -72,7 +72,7 @@
 .descuento {
   margin-right: var(--spacing-36);
   border: none;
-  border-bottom: 2px solid #ff3333;
+  border-bottom: 3px solid #ff3333;
   outline: none;
 }
 

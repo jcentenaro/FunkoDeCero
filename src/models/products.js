@@ -4,6 +4,8 @@ const sequelize = require("../config/conn");
 
 const category = require("./category");
 
+const licence = require("./licence");
+
 const products = sequelize.define("products", {
    
   nombre: {
@@ -37,7 +39,8 @@ const products = sequelize.define("products", {
   });
 
   products.belongsTo(category);
-  
+  products.belongsTo(licence);
+
   // (async () => {
   //   await sequelize.sync();
   //   // await sequelize.sync({ force: true });

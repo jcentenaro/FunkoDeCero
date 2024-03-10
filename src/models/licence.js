@@ -2,12 +2,12 @@ const { DataTypes } = require("sequelize");
 
 const sequelize = require("../config/conn");
 
-const category = sequelize.define("category", {
+const licence = sequelize.define("licence", {
   nombre: {
     type: DataTypes.STRING,
     allowNull: false,
   },
   });
+
   
-  
-  module.exports = category;
+  module.exports = licence;
