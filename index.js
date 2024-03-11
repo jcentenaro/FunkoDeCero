@@ -107,5 +107,5 @@ app.listen(PORT, async () => {
         console.log(error);
     }
     
-    console.log(`${PORT}`);
+    console.log(`http://localhost:${PORT}`);
 });
