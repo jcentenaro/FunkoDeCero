@@ -18,12 +18,12 @@
                     <option value="alpha-descending">Z-A</option>
                 </select>
             </div>
-            <div class="filter category-section">
+            <div class="filter category-section"> <!-- Aquí agregamos la sección para filtrar por categoría -->
                 <label class="filter-title" for="category">CATEGORÍA</label>
                 <select id="categorySelect" class="filter-input-primary filter-select-primary" name="categoria">
                     <option value="" disabled selected hidden>Selecciona una categoría</option>
-                    <% products.forEach(product => {  %>
-                        <option value="<%= product.categoryId %>"><%= product.category.nombre %></option>
+                    <% categories.forEach(category => {  %>
+                        <option value="<%= category.id %>"><%= category.nombre %></option>
                     <% }) %>
                 </select>
             </div>

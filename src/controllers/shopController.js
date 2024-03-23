@@ -1,4 +1,3 @@
-
 const data = require("../services/service_product");
 const fs = require("fs");
 const path = require("path");
@@ -10,7 +9,7 @@ const model = require("../models/products");
 const category = require("../models/category");
 const licence = require("../models/licence");
 
-const shopView = async (req, res) => {
+const shopView = async (req, res) => {  
   try {
     const page = parseInt(req.query.page) || 1; // Obtén el número de página desde la URL, o usa la página 1 si no se proporciona
     const pageSize = 6; // Define el tamaño de la página, es decir, cuántos productos mostrar por página
@@ -18,28 +17,39 @@ const shopView = async (req, res) => {
     // Calcula el offset para la consulta, es decir, el número de productos que se deben saltar para llegar a la página solicitada
     const offset = (page - 1) * pageSize;
 
-    // Consulta la base de datos para obtener los productos de la página actual
+    let whereCondition = {}; // Condiciones de búsqueda inicialmente vacías
+
+    // Verifica si se proporcionó un parámetro de categoría en la solicitud
+    if (req.query.categoryId) {
+      // Si se proporcionó un ID de categoría, establece la condición de búsqueda para filtrar por esa categoría
+      whereCondition.categoryId = req.query.categoryId;
+    }
+
+    // Consulta la base de datos para obtener los productos de la página actual, con la condición de búsqueda aplicada si corresponde
     const products = await model.findAll({
       include: [
         {
           model: category,
-          attributes: ['nombre']
+          attributes: ["nombre"],
         },
         {
           model: licence,
-          attributes: ['nombre']
-        }
+          attributes: ["nombre"],
+        },
       ],
+      where: whereCondition, // Aplica la condición de búsqueda
       limit: pageSize, // Limita la cantidad de productos devueltos por página
-      offset: offset // Salta los productos anteriores a la página actual
+      offset: offset, // Salta los productos anteriores a la página actual
+      order: [["nombre", "ASC"]], // Ordena los productos por el nombre del producto de forma ascendente
     });
 
     // Calcula el número total de productos para determinar el número total de páginas
     const totalProducts = await model.count();
     const totalPages = Math.ceil(totalProducts / pageSize);
+    const categories = await category.findAll(); // Suponiendo que obtienes las categorías de la base de datos
 
-    // Renderiza la vista y pasa los productos y otros datos necesarios
-    res.render('shop/shop', { products, currentPage: page, totalPages });
+    // Renderiza la vista y pasa los productos, categorías y otros datos necesarios
+    res.render("shop/shop", { products, currentPage: page, totalPages, categories });
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
@@ -51,18 +61,18 @@ const shopViewSw = async (req, res) => {
   try {
     const products = await model.findAll({
       where: {
-        licenceId: '1',
+        licenceId: "1",
       },
       include: [
         {
           model: category,
-          attributes: ['nombre']
+          attributes: ["nombre"],
         },
         {
-          model: licence, 
-          attributes: ['nombre']
-        }
-      ]
+          model: licence,
+          attributes: ["nombre"],
+        },
+      ],
     });
     // console.log(productos);
     res.render("shop/starwars", { products });
@@ -76,18 +86,18 @@ const shopViewPM = async (req, res) => {
   try {
     const products = await model.findAll({
       where: {
-        licenceId: '3',
+        licenceId: "3",
       },
       include: [
         {
           model: category,
-          attributes: ['nombre']
+          attributes: ["nombre"],
         },
         {
-          model: licence, 
-          attributes: ['nombre']
-        }
-      ]
+          model: licence,
+          attributes: ["nombre"],
+        },
+      ],
     });
     // console.log(productos);
     res.render("shop/pokemon", { products });
@@ -101,18 +111,18 @@ const shopViewHP = async (req, res) => {
   try {
     const products = await model.findAll({
       where: {
-        licenceId: '4',
+        licenceId: "4",
       },
       include: [
         {
           model: category,
-          attributes: ['nombre']
+          attributes: ["nombre"],
         },
         {
-          model: licence, 
-          attributes: ['nombre']
-        }
-      ]
+          model: licence,
+          attributes: ["nombre"],
+        },
+      ],
     });
     // console.log(productos);
     res.render("shop/harrypotter", { products });
@@ -122,22 +132,21 @@ const shopViewHP = async (req, res) => {
   }
 };
 
-
 const idView = async (req, res) => {
   try {
     const product = await model.findByPk(req.params.id, {
       include: [
         {
           model: category,
-          attributes: ['nombre']
+          attributes: ["nombre"],
         },
         {
           model: licence,
-          attributes: ['nombre']
-        }
-      ]
+          attributes: ["nombre"],
+        },
+      ],
     });
-    
+
     // console.log(productos);
     if (product) {
       res.render("shop/item", { values: product });
