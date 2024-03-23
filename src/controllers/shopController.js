@@ -12,26 +12,40 @@ const licence = require("../models/licence");
 
 const shopView = async (req, res) => {
   try {
+    const page = parseInt(req.query.page) || 1; // Obtén el número de página desde la URL, o usa la página 1 si no se proporciona
+    const pageSize = 6; // Define el tamaño de la página, es decir, cuántos productos mostrar por página
+
+    // Calcula el offset para la consulta, es decir, el número de productos que se deben saltar para llegar a la página solicitada
+    const offset = (page - 1) * pageSize;
+
+    // Consulta la base de datos para obtener los productos de la página actual
     const products = await model.findAll({
       include: [
         {
-          model: category, 
-          attributes: ['nombre'] 
+          model: category,
+          attributes: ['nombre']
         },
         {
-          model: licence, 
+          model: licence,
           attributes: ['nombre']
         }
-      ]
+      ],
+      limit: pageSize, // Limita la cantidad de productos devueltos por página
+      offset: offset // Salta los productos anteriores a la página actual
     });
-    
-    // console.log(productos);
-    res.render("shop/shop", { products });
+
+    // Calcula el número total de productos para determinar el número total de páginas
+    const totalProducts = await model.count();
+    const totalPages = Math.ceil(totalProducts / pageSize);
+
+    // Renderiza la vista y pasa los productos y otros datos necesarios
+    res.render('shop/shop', { products, currentPage: page, totalPages });
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
   }
 };
+
 
 const shopViewSw = async (req, res) => {
   try {

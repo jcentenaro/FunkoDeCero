@@ -1,0 +1,62 @@
+<aside>
+    <section class="filters-wrapper">
+        <div class="filter search-section">
+            <label class="filter-title" for="search">BUSCAR</label>
+            <input class="filter-input-primary" type="text" name="buscar" placeholder="item o categoria">
+        </div>
+        <div class="filter order-section">
+            <div class="filters-responsive">
+                <button class="filter-button">Filtrar <i class="fa-solid fa-sliders fa-sm"></i></button>
+            </div>
+            <div class=" filter filter-order-responsive">
+                <label class="filter-title" for="order by">ORDENAR POR</label>
+                <select class="filter-input-primary filter-select-primary" name="ordenar-por">
+                    <option value="" disabled selected hidden>Mayor a menor</option>
+                    <option value="price-ascending">Mayor a menor</option>
+                    <option value="price-descending">Menor a mayor</option>
+                    <option value="alpha-ascending">A-Z</option>
+                    <option value="alpha-descending">Z-A</option>
+                </select>
+            </div>
+            <div class="filter category-section">
+                <label class="filter-title" for="category">CATEGORÍA</label>
+                <select id="categorySelect" class="filter-input-primary filter-select-primary" name="categoria">
+                    <option value="" disabled selected hidden>Selecciona una categoría</option>
+                    <% products.forEach(product => {  %>
+                        <option value="<%= product.categoryId %>"><%= product.category.nombre %></option>
+                    <% }) %>
+                </select>
+            </div>
+        </div>
+        <div class="filter price-section">
+            <label class="filter-title" for="price">PRECIO</label>
+            <form method="post">
+                <span class="filter-option-title">MIN</span>
+                <input class="filter-input-secondary" type="number" placeholder="0" min="0">
+                <span class="filter-option-title">- MAX</span>
+                <input class="filter-input-secondary" type="number" placeholder="0" min="100">
+            </form>
+        </div>
+        <div class="filter checkbox-section">
+            <label class="filter-title" for="filter">FILTRAR</label>
+            <form class="filter-toggle-container" method="post">
+                <div class="filter-toggle">
+                    <input class="filter-checkbox" type="checkbox">
+                    <label class="filter-option-title" for="new">NUEVOS</label>
+                </div>
+                <div class="filter-toggle">
+                    <input class="filter-checkbox" type="checkbox">
+                    <label class="filter-option-title" for="offers">OFERTAS</label>
+                </div>
+                <div class="filter-toggle">
+                    <input class="filter-checkbox" type="checkbox">
+                    <label class="filter-option-title" for="special-edition">EDICIÓN ESPECIAL</label>
+                </div>
+                <div class="filter-toggle">
+                    <input class="filter-checkbox" type="checkbox">
+                    <label class="filter-option-title" for="favorites">FAVORITOS</label>
+                </div>
+            </form>
+        </div>
+    </section>
+</aside>
