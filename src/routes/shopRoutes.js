@@ -24,6 +24,9 @@ const validations = [
 const controller = require("../controllers/shopController");
 //cambio app por router que es lo que maneja las rutas
 router.get("/", controller.shopView);
+router.get("/starwars", controller.shopViewSw);
+router.get("/pokemon", controller.shopViewPM);
+router.get("/harrypotter", controller.shopViewHP);
 router.get("/item/:id", controller.idView);
 router.post("/item/:id/add", controller.itemView);
 router.get("/cart", controller.cartView);

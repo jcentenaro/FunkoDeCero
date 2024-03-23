@@ -60,8 +60,8 @@ const store = async (req, res) => {
     if (producto && req.file) {
       sharp(req.file.buffer)
         .resize({
-          width: 300,
-          height: 300,
+          width: 500,
+          height: 500,
           fit: sharp.fit.cover,
           position: sharp.strategy.entropy,
         })
