@@ -113,7 +113,7 @@ header{
     }
 
     .active{
-        position: absolute;
+        position: static;
         display: flex;
         flex-direction: column;
         width: 100%;

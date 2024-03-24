@@ -8,24 +8,32 @@
             <div class="filters-responsive">
                 <button class="filter-button">Filtrar <i class="fa-solid fa-sliders fa-sm"></i></button>
             </div>
-            <div class=" filter filter-order-responsive">
-                <label class="filter-title" for="order by">ORDENAR POR</label>
-                <select class="filter-input-primary filter-select-primary" name="ordenar-por">
-                    <option value="" disabled selected hidden>Mayor a menor</option>
-                    <option value="price-ascending">Mayor a menor</option>
-                    <option value="price-descending">Menor a mayor</option>
-                    <option value="alpha-ascending">A-Z</option>
-                    <option value="alpha-descending">Z-A</option>
-                </select>
+            <div class="filter filter-order-responsive">
+                <form id="orderForm" method="get"> <!-- Agrega un formulario con un id para identificarlo -->
+                    <label class="filter-title" for="ordenar-por">ORDENAR POR</label>
+                    <select class="filter-input-primary filter-select-primary" name="ordenar-por" onchange="submitOrderForm()">
+                        <option value="" disabled selected hidden>Mayor a menor</option>
+                        <option value="price-ascending">Mayor a menor</option>
+                        <option value="price-descending">Menor a mayor</option>
+                        <option value="alpha-ascending">A-Z</option>
+                        <option value="alpha-descending">Z-A</option>
+                    </select>
+                </form>
             </div>
             <div class="filter category-section"> <!-- Aquí agregamos la sección para filtrar por categoría -->
                 <label class="filter-title" for="category">CATEGORÍA</label>
-                <select id="categorySelect" class="filter-input-primary filter-select-primary" name="categoria">
+                <form method="get" action="/shop">
+                <!-- Agrega el selector de categoría dentro del formulario -->
+                    <select id="categoryId" class="filter-input-primary filter-select-primary" name="categoryId">
                     <option value="" disabled selected hidden>Selecciona una categoría</option>
                     <% categories.forEach(category => {  %>
                         <option value="<%= category.id %>"><%= category.nombre %></option>
                     <% }) %>
-                </select>
+                    </select>
+                    <br><br>
+                    <!-- Agrega el botón dentro del formulario para enviar el filtro -->
+                    <button class="filter-input-primary-button filter-select-primary" type="submit">Filtrar</button> - <button class="filter-input-primary-button filter-select-primary" onclick="resetFiltro()">Resetear Filtro</button>
+                </form>
             </div>
         </div>
         <div class="filter price-section">

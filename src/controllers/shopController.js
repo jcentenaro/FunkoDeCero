@@ -25,6 +25,33 @@ const shopView = async (req, res) => {
       whereCondition.categoryId = req.query.categoryId;
     }
 
+    const orderBy = req.query.orderBy || 'price-ascending'; // Obtén el parámetro de orden de la solicitud o establece un valor predeterminado
+let orderColumn;
+let orderDirection;
+
+// Determina la columna y la dirección de la orden según el parámetro recibido
+switch (orderBy) {
+  case 'price-ascending':
+    orderColumn = 'precio';
+    orderDirection = 'ASC';
+    break;
+  case 'price-descending':
+    orderColumn = 'precio';
+    orderDirection = 'DESC';
+    break;
+  case 'alpha-ascending':
+    orderColumn = 'nombre';
+    orderDirection = 'ASC';
+    break;
+  case 'alpha-descending':
+    orderColumn = 'nombre';
+    orderDirection = 'DESC';
+    break;
+  default:
+    orderColumn = 'nombre';
+    orderDirection = 'ASC';
+}
+
     // Consulta la base de datos para obtener los productos de la página actual, con la condición de búsqueda aplicada si corresponde
     const products = await model.findAll({
       include: [
@@ -41,6 +68,7 @@ const shopView = async (req, res) => {
       limit: pageSize, // Limita la cantidad de productos devueltos por página
       offset: offset, // Salta los productos anteriores a la página actual
       order: [["nombre", "ASC"]], // Ordena los productos por el nombre del producto de forma ascendente
+      order: [[orderColumn, orderDirection]], // Aplica la opción de orden
     });
 
     // Calcula el número total de productos para determinar el número total de páginas
