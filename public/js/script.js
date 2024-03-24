@@ -26,3 +26,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+function handleSearch(event) {
+    if (event.key === 'Enter') {
+        event.preventDefault(); // Evita que el formulario se envíe automáticamente
+        // Obtén el valor del campo de búsqueda
+        const searchTerm = document.getElementById('buscar').value;
+        // Redirige a la misma página con el término de búsqueda como parámetro de consulta
+        window.location.href = `/shop?buscar=${encodeURIComponent(searchTerm)}`;
+    }
+};

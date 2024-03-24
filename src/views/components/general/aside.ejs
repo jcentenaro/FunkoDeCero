@@ -1,12 +1,10 @@
 <aside>
     <section class="filters-wrapper">
-        <form id="searchForm" method="get" action="/shop">
-            <div class="filter search-section">
-                <label class="filter-title" for="search">BUSCAR</label>
-                <input class="filter-input-primary" type="text" name="buscar" id="searchInput" placeholder="item o categoria">
-            </div>
-        </form>
-        
+        <div class="filter search-section">
+            <label class="filter-title" for="search">BUSCAR</label>
+            <!-- Agrega el evento onkeypress para detectar la tecla Enter -->
+            <input class="filter-input-primary" type="text" name="buscar" id="buscar" placeholder="item o categoria" onkeypress="handleSearch(event)">
+        </div>
         <div class="filter order-section">
             <div class="filters-responsive">
                 <button class="filter-button">Filtrar <i class="fa-solid fa-sliders fa-sm"></i></button>
