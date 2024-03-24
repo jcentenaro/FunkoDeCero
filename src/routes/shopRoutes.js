@@ -27,6 +27,7 @@ router.get("/", controller.shopView);
 router.get("/starwars", controller.shopViewSw);
 router.get("/pokemon", controller.shopViewPM);
 router.get("/harrypotter", controller.shopViewHP);
+router.get("/marvel", controller.shopViewMV);
 router.get("/item/:id", controller.idView);
 router.post("/item/:id/add", controller.itemView);
 router.get("/cart", controller.cartView);

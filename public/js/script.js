@@ -36,3 +36,22 @@ function handleSearch(event) {
         window.location.href = `/shop?buscar=${encodeURIComponent(searchTerm)}`;
     }
 };
+
+document.getElementById('addToCartForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevenir el comportamiento predeterminado del formulario
+    
+    // Enviar una solicitud POST al backend para agregar el producto al carrito
+    fetch('/shop/cart', {
+      method: 'POST',
+      body: new FormData(this) // Envía los datos del formulario al backend
+    })
+    .then(response => {
+      // Manejar la respuesta del servidor (por ejemplo, redireccionar a la página del carrito)
+      window.location.href = '/shop/cart';
+    })
+    .catch(error => {
+      console.error('Error al agregar producto al carrito:', error);
+      // Manejar el error si es necesario
+    });
+  });
+  

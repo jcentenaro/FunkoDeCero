@@ -21,9 +21,12 @@ const shopView = async (req, res) => {
 
     // Verificar si se proporcionó un término de búsqueda
     if (req.query.buscar) {
-      // Agregar condición para buscar por nombre de producto
-      whereCondition.nombre = { [Op.like]: `%${req.query.buscar}%` };
-    }
+      // Agregar condición para buscar por nombre del producto o licenceId de forma parcial
+      whereCondition[Op.or] = [
+          { nombre: { [Op.like]: `%${req.query.buscar}%` } },
+          { licenceId: { [Op.like]: `%${req.query.buscar}%` } }
+      ];
+  }
 
     // Verificar si se proporcionó un parámetro de categoría
     if (req.query.categoryId) {
@@ -136,6 +139,31 @@ const shopViewPM = async (req, res) => {
   }
 };
 
+const shopViewMV = async (req, res) => {
+  try {
+    const products = await model.findAll({
+      where: {
+        licenceId: "2",
+      },
+      include: [
+        {
+          model: category,
+          attributes: ["nombre"],
+        },
+        {
+          model: licence,
+          attributes: ["nombre"],
+        },
+      ],
+    });
+    // console.log(productos);
+    res.render("shop/pokemon", { products });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
+};
+
 const shopViewHP = async (req, res) => {
   try {
     const products = await model.findAll({
@@ -195,6 +223,7 @@ const itemView = (req, res) => {
 const cartView = (req, res) => {
   res.render("shop/cart");
 };
+
 const checkoutView = (req, res) => {
   res.send("Cart POST");
 };
@@ -204,6 +233,7 @@ module.exports = {
   shopViewSw,
   shopViewPM,
   shopViewHP,
+  shopViewMV,
   idView,
   itemView,
   cartView,
