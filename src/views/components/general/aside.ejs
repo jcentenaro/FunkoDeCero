@@ -1,9 +1,12 @@
 <aside>
     <section class="filters-wrapper">
-        <div class="filter search-section">
-            <label class="filter-title" for="search">BUSCAR</label>
-            <input class="filter-input-primary" type="text" name="buscar" placeholder="item o categoria">
-        </div>
+        <form id="searchForm" method="get" action="/shop">
+            <div class="filter search-section">
+                <label class="filter-title" for="search">BUSCAR</label>
+                <input class="filter-input-primary" type="text" name="buscar" id="searchInput" placeholder="item o categoria">
+            </div>
+        </form>
+        
         <div class="filter order-section">
             <div class="filters-responsive">
                 <button class="filter-button">Filtrar <i class="fa-solid fa-sliders fa-sm"></i></button>

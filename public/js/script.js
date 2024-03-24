@@ -13,3 +13,16 @@ document.addEventListener("DOMContentLoaded", function () {
 function submitOrderForm() {
   document.getElementById("orderForm").submit(); // Envía el formulario cuando se selecciona una opción
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    document.getElementById('searchForm').addEventListener('submit', function (event) {
+        event.preventDefault(); // Evita que el formulario se envíe de forma predeterminada
+
+        const searchTerm = document.getElementById('searchInput').value.trim(); // Obtén el valor del campo de búsqueda y elimina los espacios en blanco al principio y al final
+
+        if (searchTerm) {
+            // Redirige a la URL de búsqueda con el término de búsqueda como parámetro
+            window.location.href = `/shop?buscar=${encodeURIComponent(searchTerm)}`;
+        }
+    });
+});
