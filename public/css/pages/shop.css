@@ -178,13 +178,13 @@
 
     .order-section{
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content:space-between;
     }
 
-    .order-section div{
+    /* .order-section div{
         width: 50%;
-    }
+    } */
 
     .filters-responsive{
         display:inline-block ;
@@ -202,7 +202,24 @@
         font-size: var(--font-small);
     }
 
+    .filter-input-primary-button{
+        background-color: #ff0000;
+        color: white;
+        padding: var(--spacing-8);
+        border-radius: 5px;
+    }
 
+    .filters-wrapper{
+        gap: 8px;,
+    }
+
+    .pagination-list {
+        padding: 0px;
+        align-items: baseline;
+    }
+    .pagination-item {
+        height: auto;
+    }
     .filter-select-primary option{
         text-align: center;
     }

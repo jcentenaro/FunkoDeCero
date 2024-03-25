@@ -144,17 +144,23 @@
           </div>
         </div>
 
-        <div class="container-form__fields fields__images">
-          <div>
-            <label for="imagen" class="label-create">Imagen Principal*:</label>
-            <input
-              type="file"
-              name="imagen"
-              id="imagen"
-              class="input-create_images"
-              required
-            />
-          </div>
+        <div class="container-card">
+          <section class="card-edit">
+            <div>
+              <label for="imagen" class="label-create">Imagen Principal*:</label>
+              <input
+                type="file"
+                name="imagen"
+                id="imagen"
+                required
+                onchange="previewImage(event)"
+              />
+            </div>
+            <div id="imagePreviewContainer">
+              <img id="imagePreview" src="#" alt="Vista previa de la imagen" style="display: none; max-width: 200px; max-height: 200px;">
+            </div>
+          </section>
+          
           <!-- <div>
             <label for="image_back" class="label-create"
               >Imagen Secundaria*:</label

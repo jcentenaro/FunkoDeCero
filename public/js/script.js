@@ -55,3 +55,17 @@ document.getElementById('addToCartForm').addEventListener('submit', function(eve
     });
   });
   
+  function previewImage(event) {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+    
+    reader.onload = function() {
+      const preview = document.getElementById('imagePreview');
+      preview.src = reader.result;
+      preview.style.display = 'block';
+    }
+    
+    if (file) {
+      reader.readAsDataURL(file);
+    }
+  }
