@@ -163,7 +163,7 @@
   .collection-text {
     font-size: var(--font-large);
     font-weight: 300;
-    border-bottom: 3px solid var(--secondary-solid);
+    /* border-bottom: 3px solid var(--secondary-solid); */
     padding-bottom: var(--spacing-20);
     text-align: center;
   }
@@ -180,6 +180,28 @@
   }
 
   /* All articles style end*/
+}
+
+@media only screen and (max-width: 768px) {
+  /* Selecciona el contenedor de la colección */
+  .collection {
+    /* Establece la dirección del flexbox como columna en dispositivos móviles */
+    flex-direction: column;
+  }
+
+  /* Cambia el orden de los elementos en cada artículo de la colección */
+  .collection .collection-content {
+    order: 3; /* El contenido se mostrará después de la imagen en dispositivos móviles */
+  }
+  .collection .collection-image {
+    order: 2; /* La imagen se mostrará antes del contenido en dispositivos móviles */
+  }
+  .collection .collection-tittle .tittle {
+    order: 1; /* La imagen se mostrará antes del contenido en dispositivos móviles */
+  }
+  .collection .collection-link {
+    font-size: 16px;
+    }
 }
 
 @media screen and (max-width: 400px) {
