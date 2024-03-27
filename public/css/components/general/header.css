@@ -126,6 +126,9 @@ header{
         z-index: 3;
         background-color: var(--primary-solid);
     }
+    .navbar-logo.hide {
+        display: none;
+    }
 
     .active .with-submenu, .contact, .login{
         display: unset;

@@ -83,4 +83,16 @@ function toggleMenu(){
         scrollLock = !scrollLock;
     }
      
-}
+};
+
+document.addEventListener("DOMContentLoaded", function() {
+    const menuBars = document.querySelector(".navbar-bars");
+    const navbarMenu = document.querySelector(".navbar-menu");
+    const navbarLogo = document.querySelector(".navbar-logo");
+
+    menuBars.addEventListener("click", function() {
+        navbarMenu.classList.toggle("active");
+        navbarLogo.classList.toggle("hide"); // Agrega o elimina la clase 'hide' al logo
+    });
+});
+
