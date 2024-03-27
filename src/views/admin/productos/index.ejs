@@ -6,10 +6,13 @@
   <main>
     <section class="prod-list-wrapper container">
       <div class="prod-list-search-section">
-        <label class="prod-list-search-icon" for="search">
-          <i class="fa-solid fa-magnifying-glass fa-xl"></i>
-        </label>
-        <input type="text" name="buscar" placeholder="código, nombre o categoria" />
+        <form action="/admin/productos" method="GET"> <!-- Reemplaza "/ruta-del-controlador" con la ruta adecuada a tu controlador -->
+          <label class="prod-list-search-icon" for="buscar">
+          </label>
+          <input type="text" name="buscar" placeholder="código, nombre o categoría" />
+          <!-- Botón para resetear la búsqueda -->
+    <button class="filter-input-primary-button filter-select-primary" type="button" onclick="resetearBusqueda()" style="margin-top: 10px;">Resetear búsqueda</button>
+        </form>
       </div>
       <div class="prod-list">
         <div class="prod-list-title-section">

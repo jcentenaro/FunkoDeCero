@@ -69,3 +69,7 @@ document.getElementById('addToCartForm').addEventListener('submit', function(eve
       reader.readAsDataURL(file);
     }
   }
+  function resetearBusqueda() {
+    // Redireccionar a la misma página sin el parámetro de búsqueda
+    window.location.href = '/admin/productos';
+  }

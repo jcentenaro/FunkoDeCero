@@ -5,20 +5,38 @@ const sharp = require("sharp");
 
 const { validationResult } = require("express-validator");
 
+const { Op } = require('sequelize');
+
 const model = require("../models/products");
 const modelCategory = require("../models/category");
 const modelLicence = require("../models/licence");
 
 const index = async (req, res) => {
   try {
-    const productos = await model.findAll();
-    // console.log(productos);
+    let whereCondition = {}; // Inicializamos el objeto de condición
+
+    // Verificamos si se proporcionó un término de búsqueda
+    if (req.query.buscar) {
+      // Agregamos condiciones para buscar por nombre, categoría o id
+      whereCondition[Op.or] = [
+        { nombre: { [Op.like]: `%${req.query.buscar}%` } },
+        { id: req.query.buscar } // Suponiendo que 'buscar' puede ser un id numérico
+      ];
+    }
+    console.log(req.query.buscar)
+
+    // Realizamos la consulta a la base de datos utilizando la condición de búsqueda
+    const productos = await model.findAll({
+      where: whereCondition // Aplicamos la condición de búsqueda
+    });
+
     res.render("admin/productos/index", { productos });
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
   }
 };
+
 
 const createView = async (req, res) => {
   try {
