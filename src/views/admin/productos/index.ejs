@@ -43,7 +43,7 @@
                 <th class="prod-list-row-item row-item-title">Nombre del Producto</th>
                 <th class="prod-list-row-item row-item-title">Licencia</th>
                 <th class="prod-list-row-item row-item-title">Imagen</th>
-                <th class="prod-list-row-item row-item-title"></th>
+                <th class="prod-list-row-item row-item-title">Edit/Borrar</th>
               </tr>
               <tr class="prod-list-row">
 
@@ -82,6 +82,15 @@
           </table>
         </div>
       </div>
+      <section class="pagination">
+        <ul class="pagination-list">
+          <li class="pagination-item chevron"><a href="/admin/productos?page=1"><i class="fa-solid fa-angle-left"></i></a></li>
+          <% for (let i = 1; i <= totalPages; i++) { %>
+            <li class="pagination-item <% if (currentPage === i) { %>active<% } %>"><a href="/admin/productos?page=<%= i %>"><%= i %></a></li>
+          <% } %>
+          <li class="pagination-item chevron"><a href="/admin/productos?page=<%= totalPages %>"><i class="fa-solid fa-angle-right"></i></a></li>
+        </ul>
+      </section>
     </section>
   </main>
   <!--Main content section end-->

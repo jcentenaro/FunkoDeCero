@@ -28,7 +28,12 @@ const index = async (req, res) => {
       whereCondition.categoryId = req.query.categoryId;
     }
 
-    // Realizamos la consulta a la base de datos utilizando la condición de búsqueda
+    // Paginación
+    const page = parseInt(req.query.page) || 1; // Página actual
+    const pageSize = 10; // Tamaño de la página
+    const offset = (page - 1) * pageSize; // Desplazamiento
+
+    // Realizamos la consulta a la base de datos utilizando la condición de búsqueda y la paginación
     const productos = await model.findAll({
       where: whereCondition, // Aplicamos la condición de búsqueda
       include: [
@@ -41,15 +46,21 @@ const index = async (req, res) => {
           attributes: ["nombre"],
         },
       ],
-      where: whereCondition,
+      limit: pageSize, // Limitamos el número de resultados por página
+      offset: offset, // Aplicamos el desplazamiento
     });
 
-    res.render("admin/productos/index", { productos });
+    // Contamos el número total de productos (sin límite)
+    const totalProducts = await model.count({ where: whereCondition });
+    const totalPages = Math.ceil(totalProducts / pageSize); // Calculamos el número total de páginas
+
+    res.render("admin/productos/index", { productos, totalPages, currentPage: page });
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
   }
 };
+
 
 
 const createView = async (req, res) => {
