@@ -193,7 +193,7 @@
     } */
 
     .filters-responsive{
-        display:inline-block ;
+        display:none;
         padding: var(--spacing-8);
         text-align: center;
         border: 2px solid #000;

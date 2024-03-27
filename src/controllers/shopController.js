@@ -23,10 +23,10 @@ const shopView = async (req, res) => {
     if (req.query.buscar) {
       // Agregar condición para buscar por nombre del producto o licenceId de forma parcial
       whereCondition[Op.or] = [
-          { nombre: { [Op.like]: `%${req.query.buscar}%` } },
-          { licenceId: { [Op.like]: `%${req.query.buscar}%` } }
+        { nombre: { [Op.like]: `%${req.query.buscar}%` } },
+        { licenceId: { [Op.like]: `%${req.query.buscar}%` } }
       ];
-  }
+    }
 
     // Verificar si se proporcionó un parámetro de categoría
     if (req.query.categoryId) {
@@ -86,6 +86,7 @@ const shopView = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
 
 
 

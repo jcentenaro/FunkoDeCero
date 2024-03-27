@@ -12,12 +12,12 @@
             <div class="filter filter-order-responsive">
                 <form id="orderForm" method="get"> <!-- Agrega un formulario con un id para identificarlo -->
                     <label class="filter-title" for="ordenar-por">ORDENAR POR</label>
-                    <select class="filter-input-primary filter-select-primary" name="ordenar-por" onchange="submitOrderForm()">
-                        <option value="" disabled selected hidden>Mayor a menor</option>
-                        <option value="price-ascending">Mayor a menor</option>
-                        <option value="price-descending">Menor a mayor</option>
-                        <option value="alpha-ascending">A-Z</option>
-                        <option value="alpha-descending">Z-A</option>
+                    <select class="filter-input-primary filter-select-primary" name="orderBy" onchange="submitOrderForm()"> <!-- Asegúrate de que el nombre del select coincida con el parámetro esperado en el controlador -->
+                        <option value="" disabled selected hidden>Seleccione:</option>
+                        <option value="price-ascending">Precio Ascendente</option>
+                        <option value="price-descending">Precio Descendiente</option>
+                        <option value="alpha-ascending">Nombre Ascendente</option>
+                        <option value="alpha-descending">Nombre Descendiente</option>
                     </select>
                 </form>
             </div>
