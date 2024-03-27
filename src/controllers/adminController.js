@@ -10,6 +10,7 @@ const { Op } = require('sequelize');
 const model = require("../models/products");
 const modelCategory = require("../models/category");
 const modelLicence = require("../models/licence");
+const licence = require("../models/licence");
 
 const index = async (req, res) => {
   try {
@@ -23,11 +24,24 @@ const index = async (req, res) => {
         { id: req.query.buscar } // Suponiendo que 'buscar' puede ser un id numérico
       ];
     }
-    console.log(req.query.buscar)
+    if (req.query.categoryId) {
+      whereCondition.categoryId = req.query.categoryId;
+    }
 
     // Realizamos la consulta a la base de datos utilizando la condición de búsqueda
     const productos = await model.findAll({
-      where: whereCondition // Aplicamos la condición de búsqueda
+      where: whereCondition, // Aplicamos la condición de búsqueda
+      include: [
+        {
+          model: modelCategory,
+          attributes: ["nombre"],
+        },
+        {
+          model: modelLicence,
+          attributes: ["nombre"],
+        },
+      ],
+      where: whereCondition,
     });
 
     res.render("admin/productos/index", { productos });
