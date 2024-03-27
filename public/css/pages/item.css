@@ -143,7 +143,7 @@ input[type=button]:hover, input[type=submit]:hover{
     }
 
     .products-collection-title {
-        font-size: 12px;
+        font-size: 14px;
     }
 
     .products:first-child .products-image{
@@ -161,22 +161,26 @@ input[type=button]:hover, input[type=submit]:hover{
     }
 
     .products-title{
+        font-size: 36px;
         font-weight: 500;
         text-align: center;
     }
     
     .products-text{
         font-family: var(--secondary-font);
-        font-size: var(--font-large);
+        font-size: 20px;
         font-weight: 300;
         /* border-bottom: 3px solid var(--secondary-solid); */
         padding-bottom: var(--spacing-20);
         text-align: center;
     }
 
+    .products-image {
+        text-align: center;
+    }
     .centrar {
-        width: 65%;
-        margin-left: 11rem;
+        margin-left: auto;
+        margin-right: auto;
         display: block;
     }
     
@@ -209,10 +213,10 @@ input[type=button]:hover, input[type=submit]:hover{
 
 @media screen and (max-width:400px) {
     .products-title {
-        font-size: 36px;
+        font-size: 32px;
     }
     .products-collection-title {
-        font-size: 10px;
+        font-size: 14px;
     }
     .products-text {
         font-size: 20px;
