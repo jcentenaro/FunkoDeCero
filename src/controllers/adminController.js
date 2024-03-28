@@ -10,7 +10,7 @@ const { Op } = require('sequelize');
 const model = require("../models/products");
 const modelCategory = require("../models/category");
 const modelLicence = require("../models/licence");
-const licence = require("../models/licence");
+const modelType = require("../models/type");
 
 const index = async (req, res) => {
   try {
@@ -45,6 +45,10 @@ const index = async (req, res) => {
           model: modelLicence,
           attributes: ["nombre"],
         },
+        {
+          model: modelType,
+          attributes: ["nombre"],
+        },
       ],
       limit: pageSize, // Limitamos el número de resultados por página
       offset: offset, // Aplicamos el desplazamiento
@@ -67,7 +71,8 @@ const createView = async (req, res) => {
   try {
     const categorias = await modelCategory.findAll();
     const licencias = await modelLicence.findAll();
-    res.render("admin/productos/create", { categorias, licencias });
+    const tipos = await modelType.findAll();
+    res.render("admin/productos/create", { categorias, licencias, tipos });
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
@@ -84,9 +89,12 @@ const store = async (req, res) => {
     try {
       const categorias = await modelCategory.findAll();
       const licencias = await modelLicence.findAll();
+      const tipos = await modelType.findAll();
+      console.log(tipos);
       return res.render("admin/productos/create", {
         categorias,
         licencias,
+        tipos,
         values: req.body,
         errors: errors.array(),
       });
@@ -97,7 +105,10 @@ const store = async (req, res) => {
   }
 
   try {
-    const producto = await model.create(req.body);
+    const producto = await model.create({
+      ...req.body, // Copia todos los campos del cuerpo de la solicitud
+      typeId: req.body.tipoId // Asigna el typeId del producto
+    });
     // console.log(producto);
 
     if (producto && req.file) {
@@ -131,8 +142,9 @@ const update = async (req, res) => {
     try {
       const categorias = await modelCategory.findAll();
       const licencias = await modelLicence.findAll();
+      const tipos = await modelType.findAll();
       return res.render("admin/productos/edit", {
-        categorias, licencias,
+        categorias, licencias, tipos,
         values: { ...req.params, ...req.body },
         error: errors.array(),
       });
@@ -220,12 +232,15 @@ const updateView = (req, res) => {
 
 const editView = async (req, res) => {
   try {
-    const producto = await model.findByPk(req.params.id);
+    const producto = await model.findByPk(req.params.id, {
+      include: [modelType] // Incluye la relación con el tipo
+    });
 
     if (producto) {
       const categorias = await modelCategory.findAll();
       const licencias = await modelLicence.findAll();
-      res.render("admin/productos/edit", { values: producto, categorias, licencias });
+      const tipos = await modelType.findAll();
+      res.render("admin/productos/edit", { values: producto, categorias, licencias, tipos });
     } else {
       res.status(404).send("El producto no existe");
     }
