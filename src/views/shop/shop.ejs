@@ -11,20 +11,24 @@
         <section class="item-list">
             <% products.forEach(product => {  %>
             <!--FunkoPop card-->
-            <article class="card">
-                <a class="card-link" href="/shop/item/<%= product.id %>">
-                    <figure class="card-image">
-                        <span class="card-image-tag">NUEVO</span>
-                        <img class="card-image__front" src="/uploads/producto_<%= product.id %>.webp" alt="<%= product.nombre %>">
-                    </figure>
-                    <div class="card-content">
-                        <p style="text-transform: uppercase;"  class="card-content-category"><%= product.category.nombre %> - <%= product.licence.nombre %></p>
-                        <h4 class="card-content-name"><%= product.nombre %></h4>
-                        <p class="card-content-price">$ <%= product.precio %>.-</p>
-                        <p class="card-content-prom">3 CUOTAS SIN INTERÉS</p>
-                    </div>
-                </a>
-            </article>
+            <!--FunkoPop card-->
+<article class="card">
+    <a class="card-link" href="/shop/item/<%= product.id %>">
+        <figure class="card-image">
+            <% if (product.typeId === 1) { %> <!-- Verificar si el typeId es igual a 1 -->
+                <span class="card-image-tag">NUEVO</span> <!-- Mostrar etiqueta solo si es igual a 1 -->
+            <% } %>
+            <img class="card-image__front" src="/uploads/producto_<%= product.id %>.webp" alt="<%= product.nombre %>">
+        </figure>
+        <div class="card-content">
+            <p style="text-transform: uppercase;" class="card-content-category"><%= product.category.nombre %> - <%= product.licence.nombre %></p>
+            <h4 class="card-content-name"><%= product.nombre %></h4>
+            <p class="card-content-price">$ <%= product.precio %>.-</p>
+            <p class="card-content-prom">3 CUOTAS SIN INTERÉS</p>
+        </div>
+    </a>
+</article>
+
             <% }) %>
             
         </section>
@@ -39,20 +43,6 @@
             </ul>
         </section>
         <!-- Fin Pagination GPT -->
-
-        <!--Pagination-->
-        <!-- <section class="pagination">
-            <ul class="pagination-list">
-                <li class="pagination-item chevron"><a href="/"><i class="fa-solid fa-angle-left"></i></a></li>
-                <li class="pagination-item"><a href="/">1</a></li>
-                <li class="pagination-item pagination-mid"><a href="/">2</a></li>
-                <li class="pagination-item"><a href="/">...</a></li>
-                <li class="pagination-item pagination-mid"><a href="/">9</a></li>
-                <li class="pagination-item"><a href="/">10</a></li>
-                <li class="pagination-item chevron"><a href="/"><i class="fa-solid fa-angle-right"></i></a></li>
-            </ul>
-        </section> -->
-        <!--Pagination end-->
     </div>
     <!--Show cards with pagination end-->   
 </main>
