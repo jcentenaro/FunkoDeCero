@@ -16,13 +16,13 @@
                         <option value="" disabled selected hidden>Seleccione:</option>
                         <option value="price-ascending">Precio - a +</option>
                         <option value="price-descending">Precio + a -</option>
-                        <option value="alpha-ascending">Nombre - a +</option>
-                        <option value="alpha-descending">Nombre + a -</option>
+                        <option value="alpha-ascending">Nombre A-Z</option>
+                        <option value="alpha-descending">Nombre Z-A</option>
                     </select>
                 </form>
             </div>
             <div class="filter category-section"> <!-- Aquí agregamos la sección para filtrar por categoría -->
-                <label class="filter-title" for="category">CATEGORÍA</label>
+                <label class="filter-title" for="category">Categoría:</label>
                 <form method="get" action="/shop">
                 <!-- Agrega el selector de categoría dentro del formulario -->
                     <select id="categoryId" class="filter-input-primary filter-select-primary" name="categoryId">
@@ -39,36 +39,6 @@
                     </div>
                 </form>
             </div>
-        </div>
-        <div class="filter price-section">
-            <label class="filter-title" for="price">PRECIO</label>
-            <form method="post">
-                <span class="filter-option-title">MIN</span>
-                <input class="filter-input-secondary" type="number" placeholder="0" min="0">
-                <span class="filter-option-title">- MAX</span>
-                <input class="filter-input-secondary" type="number" placeholder="0" min="100">
-            </form>
-        </div>
-        <div class="filter checkbox-section">
-            <label class="filter-title" for="filter">FILTRAR</label>
-            <form class="filter-toggle-container" method="post">
-                <div class="filter-toggle">
-                    <input class="filter-checkbox" type="checkbox">
-                    <label class="filter-option-title" for="new">NUEVOS</label>
-                </div>
-                <div class="filter-toggle">
-                    <input class="filter-checkbox" type="checkbox">
-                    <label class="filter-option-title" for="offers">OFERTAS</label>
-                </div>
-                <div class="filter-toggle">
-                    <input class="filter-checkbox" type="checkbox">
-                    <label class="filter-option-title" for="special-edition">EDICIÓN ESPECIAL</label>
-                </div>
-                <div class="filter-toggle">
-                    <input class="filter-checkbox" type="checkbox">
-                    <label class="filter-option-title" for="favorites">FAVORITOS</label>
-                </div>
-            </form>
         </div>
     </section>
 </aside>

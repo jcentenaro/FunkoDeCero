@@ -81,7 +81,7 @@ const createView = async (req, res) => {
 };
 
 const store = async (req, res) => {
-  // console.log(req.body, req.file);
+  console.log(req.body, req.file);
 
   const errors = validationResult(req);
 
@@ -90,16 +90,15 @@ const store = async (req, res) => {
       const categorias = await modelCategory.findAll();
       const licencias = await modelLicence.findAll();
       const tipos = await modelType.findAll();
-      console.log(tipos);
       return res.render("admin/productos/create", {
         categorias,
         licencias,
         tipos,
-        values: req.body,
+        values: { ...req.params, ...req.body },
         errors: errors.array(),
       });
     } catch (error) {
-      console.log(error);
+      console.log("Error al buscar categorías, licencias o tipos:", error);
       res.status(500).send(error);
     }
   }
@@ -128,7 +127,7 @@ const store = async (req, res) => {
     }
     res.redirect("/admin/productos");
   } catch (error) {
-    console.log(error);
+    console.log("Error al crear el producto:", error);
     res.status(500).send(error);
   }
 };
@@ -144,7 +143,9 @@ const update = async (req, res) => {
       const licencias = await modelLicence.findAll();
       const tipos = await modelType.findAll();
       return res.render("admin/productos/edit", {
-        categorias, licencias, tipos,
+        categorias,
+        licencias,
+        tipos,
         values: { ...req.params, ...req.body },
         error: errors.array(),
       });

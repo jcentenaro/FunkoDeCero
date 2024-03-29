@@ -3,45 +3,44 @@
 <!--Header section with NavBar end-->
  <main class="main-content container">
     <!--Search-Sidebar section-->
-    <%- include('../components/general/asidelicence.ejs') %>
+    <%- include('../components/general/aside.ejs') %>
     <!--Search-Sidebar section end-->
-
     <!--Show cards with pagination-->
     <div class="item-list-wrapper container">
         <section class="item-list">
             <% products.forEach(product => {  %>
             <!--FunkoPop card-->
-            <article class="card">
-                <a class="card-link" href="/shop/item/<%= product.id %>">
-                    <figure class="card-image">
-                        <span class="card-image-tag">NUEVO</span>
-                        <img class="card-image__front" src="/uploads/producto_<%= product.id %>.webp" alt="<%= product.nombre %>">
-                    </figure>
-                    <div class="card-content">
-                        <p style="text-transform: none;"  class="card-content-category"><%= product.category.nombre %> - <%= product.licence.nombre %></p>
-                        <h4 class="card-content-name"><%= product.nombre %></h4>
-                        <p class="card-content-price">$ <%= product.precio %>.-</p>
-                        <p class="card-content-prom">3 CUOTAS SIN INTERÉS</p>
-                    </div>
-                </a>
-            </article>
+<article class="card">
+    <a class="card-link" href="/shop/item/<%= product.id %>">
+        <figure class="card-image">
+            <% if (product.typeId === 1) { %> <!-- Verificar si el typeId es igual a 1 -->
+                <span class="card-image-tag">NUEVO</span> <!-- Mostrar etiqueta solo si es igual a 1 -->
+            <% } %>
+            <img class="card-image__front" src="/uploads/producto_<%= product.id %>.webp" alt="<%= product.nombre %>">
+        </figure>
+        <div class="card-content">
+            <p style="text-transform: uppercase;" class="card-content-category"><%= product.category.nombre %> - <%= product.licence.nombre %></p>
+            <h4 class="card-content-name"><%= product.nombre %></h4>
+            <p class="card-content-price">$ <%= product.precio %>.-</p>
+            <p class="card-content-prom">3 CUOTAS SIN INTERÉS</p>
+        </div>
+    </a>
+</article>
+
             <% }) %>
             
         </section>
-        
-        <!--Pagination-->
+        <!-- Pagination GPT -->
         <section class="pagination">
             <ul class="pagination-list">
-                <li class="pagination-item chevron"><a href="/"><i class="fa-solid fa-angle-left"></i></a></li>
-                <li class="pagination-item"><a href="/">1</a></li>
-                <li class="pagination-item pagination-mid"><a href="/">2</a></li>
-                <li class="pagination-item"><a href="/">...</a></li>
-                <li class="pagination-item pagination-mid"><a href="/">9</a></li>
-                <li class="pagination-item"><a href="/">10</a></li>
-                <li class="pagination-item chevron"><a href="/"><i class="fa-solid fa-angle-right"></i></a></li>
+                <li class="pagination-item chevron"><a href="/shop?page=1"><i class="fa-solid fa-angle-left"></i></a></li>
+                <% for (let i = 1; i <= totalPages; i++) { %>
+                    <li class="pagination-item <% if (currentPage === i) { %>active<% } %>"><a href="/shop?page=<%= i %>"><%= i %></a></li>
+                <% } %>
+                <li class="pagination-item chevron"><a href="/shop?page=<%= totalPages %>"><i class="fa-solid fa-angle-right"></i></a></li>
             </ul>
         </section>
-        <!--Pagination end-->
+        <!-- Fin Pagination GPT -->
     </div>
     <!--Show cards with pagination end-->   
 </main>

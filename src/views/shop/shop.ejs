@@ -3,14 +3,12 @@
 <!--Header section with NavBar end-->
  <main class="main-content container">
     <!--Search-Sidebar section-->
-    
-    <!--Search-Sidebar section end-->
     <%- include('../components/general/aside.ejs') %>
+    <!--Search-Sidebar section end-->
     <!--Show cards with pagination-->
     <div class="item-list-wrapper container">
         <section class="item-list">
             <% products.forEach(product => {  %>
-            <!--FunkoPop card-->
             <!--FunkoPop card-->
 <article class="card">
     <a class="card-link" href="/shop/item/<%= product.id %>">
