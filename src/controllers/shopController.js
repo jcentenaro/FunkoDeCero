@@ -105,6 +105,23 @@ const shopView = async (req, res) => {
 
 const shopViewSw = async (req, res) => {
   try {
+    // Consulta para los productos del slider
+    const sliderProducts = await model.findAll({
+      where: {
+        typeId: 1, // Aquí especifica el ID específico que deseas filtrar
+      },
+      include: [
+        {
+          model: category,
+          attributes: ["nombre"],
+        },
+        {
+          model: licence,
+          attributes: ["nombre"],
+        },
+      ],
+    });
+
     const products = await model.findAll({
       where: {
         licenceId: "1",
@@ -120,7 +137,7 @@ const shopViewSw = async (req, res) => {
         },
       ],
     });
-    res.render("shop/starwars", { products });
+    res.render("shop/starwars", { products, sliderProducts });
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
@@ -129,6 +146,23 @@ const shopViewSw = async (req, res) => {
 
 const shopViewPM = async (req, res) => {
   try {
+    // Consulta para los productos del slider
+    const sliderProducts = await model.findAll({
+      where: {
+        typeId: 1, // Aquí especifica el ID específico que deseas filtrar
+      },
+      include: [
+        {
+          model: category,
+          attributes: ["nombre"],
+        },
+        {
+          model: licence,
+          attributes: ["nombre"],
+        },
+      ],
+    });
+
     const products = await model.findAll({
       where: {
         licenceId: "3",
@@ -144,7 +178,7 @@ const shopViewPM = async (req, res) => {
         },
       ],
     });
-    res.render("shop/pokemon", { products });
+    res.render("shop/pokemon", { products, sliderProducts });
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
@@ -153,6 +187,23 @@ const shopViewPM = async (req, res) => {
 
 const shopViewMV = async (req, res) => {
   try {
+    // Consulta para los productos del slider
+    const sliderProducts = await model.findAll({
+      where: {
+        typeId: 1, // Aquí especifica el ID específico que deseas filtrar
+      },
+      include: [
+        {
+          model: category,
+          attributes: ["nombre"],
+        },
+        {
+          model: licence,
+          attributes: ["nombre"],
+        },
+      ],
+    });
+
     const products = await model.findAll({
       where: {
         licenceId: "2",
@@ -168,7 +219,7 @@ const shopViewMV = async (req, res) => {
         },
       ],
     });
-    res.render("shop/pokemon", { products });
+    res.render("shop/pokemon", { products, sliderProducts });
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
@@ -177,6 +228,23 @@ const shopViewMV = async (req, res) => {
 
 const shopViewHP = async (req, res) => {
   try {
+    // Consulta para los productos del slider
+    const sliderProducts = await model.findAll({
+      where: {
+        typeId: 1, // Aquí especifica el ID específico que deseas filtrar
+      },
+      include: [
+        {
+          model: category,
+          attributes: ["nombre"],
+        },
+        {
+          model: licence,
+          attributes: ["nombre"],
+        },
+      ],
+    });
+
     const products = await model.findAll({
       where: {
         licenceId: "4",
@@ -192,7 +260,7 @@ const shopViewHP = async (req, res) => {
         },
       ],
     });
-    res.render("shop/harrypotter", { products });
+    res.render("shop/harrypotter", { products, sliderProducts });
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
