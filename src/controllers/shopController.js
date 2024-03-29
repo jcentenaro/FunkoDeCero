@@ -59,9 +59,7 @@ const shopView = async (req, res) => {
     // Consulta para los productos del slider
     const sliderProducts = await model.findAll({
       where: {
-        typeId: {
-          [Op.not]: null
-        }
+        typeId: 1, // Aquí especifica el ID específico que deseas filtrar
       },
       include: [
         {
