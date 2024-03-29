@@ -6,7 +6,7 @@
     <div class="glide">
       <div class="glide__track" data-glide-el="track">
         <ul class="glide__slides slider-article">
-          <% products.forEach(product => { %>
+          <% sliderProducts.forEach(product => { %> <!-- Cambio aquí -->
           <li class="slider-items">
             <a class="card-link" href="/shop/item/<%= product.id %>">
               <figure class="card-image">
@@ -25,7 +25,6 @@
               </div>
             </a>
           </li>
-
           <% }); %>
         </ul>
       </div>

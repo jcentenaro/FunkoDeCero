@@ -19,16 +19,13 @@ const shopView = async (req, res) => {
 
     let whereCondition = {};
 
-    // Verificar si se proporcionó un término de búsqueda
     if (req.query.buscar) {
-      // Agregar condición para buscar por nombre del producto o licenceId de forma parcial
       whereCondition[Op.or] = [
         { nombre: { [Op.like]: `%${req.query.buscar}%` } },
         { licenceId: { [Op.like]: `%${req.query.buscar}%` } }
       ];
     }
 
-    // Verificar si se proporcionó un parámetro de categoría
     if (req.query.categoryId) {
       whereCondition.categoryId = req.query.categoryId;
     }
@@ -59,6 +56,26 @@ const shopView = async (req, res) => {
         orderDirection = 'ASC';
     }
 
+    // Consulta para los productos del slider
+    const sliderProducts = await model.findAll({
+      where: {
+        typeId: {
+          [Op.not]: null
+        }
+      },
+      include: [
+        {
+          model: category,
+          attributes: ["nombre"],
+        },
+        {
+          model: licence,
+          attributes: ["nombre"],
+        },
+      ],
+    });
+
+    // Consulta para los productos de la página principal
     const products = await model.findAll({
       include: [
         {
@@ -76,19 +93,17 @@ const shopView = async (req, res) => {
       order: [[orderColumn, orderDirection]],
     });
 
-    const totalProducts = await model.count({ where: whereCondition }); // Contar solo los productos que coinciden con la condición
+    const totalProducts = await model.count({ where: whereCondition });
     const totalPages = Math.ceil(totalProducts / pageSize);
     const categories = await category.findAll();
 
-    res.render("shop/shop", { products, currentPage: page, totalPages, categories });
+    // Renderizar la página principal y pasar los productos del slider como una variable aparte
+    res.render("shop/shop", { products, sliderProducts, currentPage: page, totalPages, categories });
   } catch (error) {
     console.log(error);
     res.status(500).send(error);
   }
 };
-
-
-
 
 const shopViewSw = async (req, res) => {
   try {
@@ -107,7 +122,6 @@ const shopViewSw = async (req, res) => {
         },
       ],
     });
-    // console.log(productos);
     res.render("shop/starwars", { products });
   } catch (error) {
     console.log(error);
@@ -132,7 +146,6 @@ const shopViewPM = async (req, res) => {
         },
       ],
     });
-    // console.log(productos);
     res.render("shop/pokemon", { products });
   } catch (error) {
     console.log(error);
@@ -157,7 +170,6 @@ const shopViewMV = async (req, res) => {
         },
       ],
     });
-    // console.log(productos);
     res.render("shop/pokemon", { products });
   } catch (error) {
     console.log(error);
@@ -182,7 +194,6 @@ const shopViewHP = async (req, res) => {
         },
       ],
     });
-    // console.log(productos);
     res.render("shop/harrypotter", { products });
   } catch (error) {
     console.log(error);
@@ -205,7 +216,6 @@ const idView = async (req, res) => {
       ],
     });
 
-    // console.log(productos);
     if (product) {
       res.render("shop/item", { values: product });
     } else {
