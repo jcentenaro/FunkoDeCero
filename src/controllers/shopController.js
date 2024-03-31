@@ -22,7 +22,7 @@ const shopView = async (req, res) => {
     if (req.query.buscar) {
       whereCondition[Op.or] = [
         { nombre: { [Op.like]: `%${req.query.buscar}%` } },
-        { licenceId: { [Op.like]: `%${req.query.buscar}%` } }
+        { '$licence.nombre$': { [Op.like]: `%${req.query.buscar}%` } } // Condición para buscar por nombre de licencia
       ];
     }
 
