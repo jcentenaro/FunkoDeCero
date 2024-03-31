@@ -73,3 +73,13 @@ document.getElementById('addToCartForm').addEventListener('submit', function(eve
     // Redireccionar a la misma página sin el parámetro de búsqueda
     window.location.href = '/admin/productos';
   }
+
+  function buildQueryParams(query) {
+    let params = '';
+    for (const key in query) {
+        if (query.hasOwnProperty(key) && key !== 'page') {
+            params += `&${key}=${query[key]}`;
+        }
+    }
+    return params;
+}

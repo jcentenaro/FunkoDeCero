@@ -11,7 +11,7 @@ const model = require("../models/products");
 const category = require("../models/category");
 const licence = require("../models/licence");
 
-const shopView = async (req, res) => {  
+const shopView = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
     const pageSize = 9;
@@ -74,7 +74,8 @@ const shopView = async (req, res) => {
     });
 
     // Consulta para los productos de la página principal
-    const products = await model.findAll({
+    const { count, rows: products } = await model.findAndCountAll({
+      where: whereCondition,
       include: [
         {
           model: category,
@@ -85,14 +86,12 @@ const shopView = async (req, res) => {
           attributes: ["nombre"],
         },
       ],
-      where: whereCondition,
       limit: pageSize,
       offset: offset,
       order: [[orderColumn, orderDirection]],
     });
 
-    const totalProducts = await model.count({ where: whereCondition });
-    const totalPages = Math.ceil(totalProducts / pageSize);
+    const totalPages = Math.ceil(count / pageSize);
     const categories = await category.findAll();
 
     // Renderizar la página principal y pasar los productos del slider como una variable aparte
@@ -103,7 +102,8 @@ const shopView = async (req, res) => {
   }
 };
 
-const shopViewSw = async (req, res) => {  
+
+const shopViewSw = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
     const pageSize = 9;
@@ -166,7 +166,7 @@ const shopViewSw = async (req, res) => {
     });
 
     // Consulta para los productos de la página principal
-    const products = await model.findAll({
+    const { count, rows: products } = await model.findAndCountAll({
       where: {
         licenceId: "1", // Establecer la condición de licenceId aquí
         ...whereCondition, // Mantener las demás condiciones de búsqueda
@@ -186,8 +186,7 @@ const shopViewSw = async (req, res) => {
       order: [[orderColumn, orderDirection]],
     });
 
-    const totalProducts = await model.count({ where: whereCondition });
-    const totalPages = Math.ceil(totalProducts / pageSize);
+    const totalPages = Math.ceil(count / pageSize);
     const categories = await category.findAll();
 
     // Renderizar la página principal y pasar los productos del slider como una variable aparte
@@ -198,7 +197,8 @@ const shopViewSw = async (req, res) => {
   }
 };
 
-const shopViewPM = async (req, res) => {  
+
+const shopViewPM = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
     const pageSize = 9;
@@ -261,7 +261,7 @@ const shopViewPM = async (req, res) => {
     });
 
     // Consulta para los productos de la página principal
-    const products = await model.findAll({
+    const { count, rows: products } = await model.findAndCountAll({
       where: {
         licenceId: "3", // Establecer la condición de licenceId aquí
         ...whereCondition, // Mantener las demás condiciones de búsqueda
@@ -281,8 +281,7 @@ const shopViewPM = async (req, res) => {
       order: [[orderColumn, orderDirection]],
     });
 
-    const totalProducts = await model.count({ where: whereCondition });
-    const totalPages = Math.ceil(totalProducts / pageSize);
+    const totalPages = Math.ceil(count / pageSize);
     const categories = await category.findAll();
 
     // Renderizar la página principal y pasar los productos del slider como una variable aparte
@@ -293,7 +292,8 @@ const shopViewPM = async (req, res) => {
   }
 };
 
-const shopViewMV = async (req, res) => {  
+
+const shopViewMV = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
     const pageSize = 9;
@@ -356,7 +356,7 @@ const shopViewMV = async (req, res) => {
     });
 
     // Consulta para los productos de la página principal
-    const products = await model.findAll({
+    const { count, rows: products } = await model.findAndCountAll({
       where: {
         licenceId: "2", // Establecer la condición de licenceId aquí
         ...whereCondition, // Mantener las demás condiciones de búsqueda
@@ -376,8 +376,7 @@ const shopViewMV = async (req, res) => {
       order: [[orderColumn, orderDirection]],
     });
 
-    const totalProducts = await model.count({ where: whereCondition });
-    const totalPages = Math.ceil(totalProducts / pageSize);
+    const totalPages = Math.ceil(count / pageSize);
     const categories = await category.findAll();
 
     // Renderizar la página principal y pasar los productos del slider como una variable aparte
@@ -388,7 +387,7 @@ const shopViewMV = async (req, res) => {
   }
 };
 
-const shopViewHP = async (req, res) => {  
+const shopViewHP = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
     const pageSize = 9;
@@ -451,7 +450,7 @@ const shopViewHP = async (req, res) => {
     });
 
     // Consulta para los productos de la página principal
-    const products = await model.findAll({
+    const { count, rows: products } = await model.findAndCountAll({
       where: {
         licenceId: "4", // Establecer la condición de licenceId aquí
         ...whereCondition, // Mantener las demás condiciones de búsqueda
@@ -471,8 +470,7 @@ const shopViewHP = async (req, res) => {
       order: [[orderColumn, orderDirection]],
     });
 
-    const totalProducts = await model.count({ where: whereCondition });
-    const totalPages = Math.ceil(totalProducts / pageSize);
+    const totalPages = Math.ceil(count / pageSize);
     const categories = await category.findAll();
 
     // Renderizar la página principal y pasar los productos del slider como una variable aparte
@@ -482,6 +480,7 @@ const shopViewHP = async (req, res) => {
     res.status(500).send(error);
   }
 };
+
 
 
 const idView = async (req, res) => {
