@@ -153,6 +153,8 @@
   .collection-content {
     gap: var(--spacing-8);
     align-items: center;
+    border-bottom: 3px solid var(--primary-solid);
+    padding-bottom: 20px;
   }
 
   .collection-title {
@@ -164,6 +166,7 @@
     font-size: var(--font-large);
     font-weight: 300;
     /* border-bottom: 3px solid var(--secondary-solid); */
+    border-bottom: none;
     padding-bottom: var(--spacing-20);
     text-align: center;
   }
