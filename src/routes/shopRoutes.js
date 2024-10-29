@@ -29,6 +29,7 @@ router.get("/pokemon", controller.shopViewPM);
 router.get("/harrypotter", controller.shopViewHP);
 router.get("/marvel", controller.shopViewMV);
 router.get("/dieverruckt", controller.shopViewDV);
+router.get("/dieverrucktmujer", controller.shopViewDVM);
 router.get("/item/:id", controller.idView);
 router.post("/item/:id/add", controller.itemView);
 router.get("/cart", controller.cartView);

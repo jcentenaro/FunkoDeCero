@@ -3,9 +3,7 @@ const { DataTypes } = require("sequelize");
 const sequelize = require("../config/conn");
 
 const category = require("./category");
-
 const licence = require("./licence");
-
 const type = require("./type");
 
 const products = sequelize.define("products", {

@@ -2,7 +2,7 @@
 
 .hero {
   background-image: url(../../images/funkos-banner.webp);
-  background-position: top;
+  background-position: center;
   background-size: cover;
   background-attachment: fixed;
   filter: blur(0px);
