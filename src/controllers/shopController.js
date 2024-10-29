@@ -387,6 +387,100 @@ const shopViewMV = async (req, res) => {
   }
 };
 
+const shopViewDV = async (req, res) => {
+  try {
+    const page = parseInt(req.query.page) || 1;
+    const pageSize = 9;
+    const offset = (page - 1) * pageSize;
+
+    let whereCondition = {};
+
+    if (req.query.buscar) {
+      whereCondition[Op.or] = [
+        { nombre: { [Op.like]: `%${req.query.buscar}%` } },
+        { licenceId: { [Op.like]: `%${req.query.buscar}%` } }
+      ];
+    }
+
+    if (req.query.categoryId) {
+      whereCondition.categoryId = req.query.categoryId;
+    }
+
+    const orderBy = req.query.orderBy || 'price-ascending';
+    let orderColumn;
+    let orderDirection;
+
+    switch (orderBy) {
+      case 'price-ascending':
+        orderColumn = 'precio';
+        orderDirection = 'ASC';
+        break;
+      case 'price-descending':
+        orderColumn = 'precio';
+        orderDirection = 'DESC';
+        break;
+      case 'alpha-ascending':
+        orderColumn = 'nombre';
+        orderDirection = 'ASC';
+        break;
+      case 'alpha-descending':
+        orderColumn = 'nombre';
+        orderDirection = 'DESC';
+        break;
+      default:
+        orderColumn = 'nombre';
+        orderDirection = 'ASC';
+    }
+
+    // Consulta para los productos del slider
+    const sliderProducts = await model.findAll({
+      where: {
+        typeId: 1, // Aquí especifica el ID específico que deseas filtrar
+      },
+      include: [
+        {
+          model: category,
+          attributes: ["nombre"],
+        },
+        {
+          model: licence,
+          attributes: ["nombre"],
+        },
+      ],
+    });
+
+    // Consulta para los productos de la página principal
+    const { count, rows: products } = await model.findAndCountAll({
+      where: {
+        licenceId: "8", // Establecer la condición de licenceId aquí
+        ...whereCondition, // Mantener las demás condiciones de búsqueda
+      },
+      include: [
+        {
+          model: category,
+          attributes: ["nombre"],
+        },
+        {
+          model: licence,
+          attributes: ["nombre"],
+        },
+      ],
+      limit: pageSize,
+      offset: offset,
+      order: [[orderColumn, orderDirection]],
+    });
+
+    const totalPages = Math.ceil(count / pageSize);
+    const categories = await category.findAll();
+
+    // Renderizar la página principal y pasar los productos del slider como una variable aparte
+    res.render("shop/dieverruckt", { products, sliderProducts, currentPage: page, totalPages, categories });
+  } catch (error) {
+    console.log(error);
+    res.status(500).send(error);
+  }
+};
+
 const shopViewHP = async (req, res) => {
   try {
     const page = parseInt(req.query.page) || 1;
@@ -527,6 +621,7 @@ module.exports = {
   shopViewPM,
   shopViewHP,
   shopViewMV,
+  shopViewDV,
   idView,
   itemView,
   cartView,

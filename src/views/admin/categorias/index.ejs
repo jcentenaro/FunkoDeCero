@@ -36,33 +36,36 @@
             <tbody>
               <tr class="prod-list-row">
                 <th class="prod-list-row-item row-item-title">ID</th>
-                <th class="prod-list-row-item row-item-title">Nombre del categoria</th>
+                <th class="prod-list-row-item row-item-title">Categoria</th>
                 <th class="prod-list-row-item row-item-title"></th>
                 <th class="prod-list-row-item row-item-title"></th>
                 <th class="prod-list-row-item row-item-title"></th>
               </tr>
               <tr class="prod-list-row">
 
-                <% categorias.forEach(categoria => {  %> 
-                  <td class="prod-list-row-item row-item-added"><%= categoria.id %></td>
-                  <td class="prod-list-row-item row-item-added"><%= categoria.nombre %></td>
-                  <td class="prod-list-row-item row-item-added"></td>
-                  <td class="prod-list-row-item row-item-added"></td>
-                  <td class="prod-list-row-item row-item-added">
-                    <div class="row-item-added-icons">
-                      <button>
-                        <a href="/admin/categorias/<%= categoria.id %>/edit/">
-                          <img src="../images/icons/edit_pencil.svg" alt="lapiz">
-                        </a>
-                      </button>
-                      <form class="form-delete" action="/admin/categorias/<%= categoria.id %>?_method=DELETE" method="POST">
-                        <button type="submit">
-                          <img src="../images/icons/delete_trash.svg" alt="basura">
+                <% categorias.forEach(categoria => { %>
+                  <tr class="prod-list-row">
+                    <td class="prod-list-row-item row-item-added"><%= categoria.id %></td>
+                    <td class="prod-list-row-item row-item-added"><%= categoria.nombre %></td>
+                    <td class="prod-list-row-item row-item-added"></td>
+                    <td class="prod-list-row-item row-item-added"></td>
+                    <td class="prod-list-row-item row-item-added">
+                      <div class="row-item-added-icons">
+                        <button>
+                          <a href="/admin/categorias/<%= categoria.id %>/edit/">
+                            <img src="../images/icons/edit_pencil.svg" alt="lapiz">
+                          </a>
                         </button>
-                      </form>
-                    </div>
-                  </td>
-                  <% }) %>
+                        <form class="form-delete" action="/admin/categorias/<%= categoria.id %>?_method=DELETE" method="POST">
+                          <button type="submit">
+                            <img src="../images/icons/delete_trash.svg" alt="basura">
+                          </button>
+                        </form>
+                      </div>
+                    </td>
+                  </tr>
+                <% }) %>
+                
                
 
               </tr>
