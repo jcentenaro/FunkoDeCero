@@ -220,7 +220,7 @@
   }
 
   .collection:first-child .collection-image {
-    margin-left: -2rem;
+    margin-left: 0;
     max-width: 100%;
   }
 
