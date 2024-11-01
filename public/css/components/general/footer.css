@@ -1,7 +1,8 @@
 /* Footer style */
 
 footer{
-    background-color: var(--dark-background-solid);
+    /* background-color: var(--dark-background-solid); */
+    background-color: black;
     padding: var(--spacing-36) var(--spacing-128);
 }
 

@@ -1,7 +1,8 @@
 /* Header style */
 
 header{
-    background-color: var(--dark-background-solid);
+    background-color: black;
+    /* background-color: var(--dark-background-solid); */
 }
 
 .navbar-header{
@@ -54,7 +55,8 @@ header{
 .submenu{
     display: none;
     position: absolute;
-    background-color: var(--dark-background-solid);
+    /* background-color: var(--dark-background-solid); */
+    background-color: black;
     z-index: 5;
 }
 

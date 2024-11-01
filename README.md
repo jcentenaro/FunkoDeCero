@@ -14,6 +14,7 @@ npm run dev
 
 ## GIT
 ```shell
+ctrl+c cierra
 git init
 git branch
 git status

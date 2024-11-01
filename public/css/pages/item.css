@@ -112,7 +112,8 @@ input[type=button]:hover, input[type=submit]:hover{
 }
 
 .footer-img {
-    width: 25%;
+    /* width: 25%; */
+    max-width: 200px;
 }
 
 /* .quantity input:focus {
