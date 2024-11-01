@@ -1,6 +1,6 @@
 # Node.js 
 
-## Instalación
+## Instalación Node
 
 ```shell
 npm install
@@ -10,4 +10,14 @@ npm install
 
 ```shell
 npm run dev
+```
+
+## GIT
+```shell
+git init
+git branch
+git status
+git add .
+git commit -m "sarasa"
+git push
 ```
