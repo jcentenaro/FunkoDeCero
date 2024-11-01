@@ -97,7 +97,8 @@ header{
     /* Header style */
 
     header{
-        background-color: var(--dark-background-solid);
+        /* background-color: var(--dark-background-solid); */
+        background-color: black;
         padding: var(--spacing-8) var(--spacing-24);
     }
     
