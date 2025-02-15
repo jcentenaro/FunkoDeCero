@@ -73,18 +73,18 @@
 
 .prod-list-row{
   display: grid;
-  grid-template-columns: 0.15fr 0.3fr 0.5fr 0.4fr 0.2fr 0.15fr;
+  grid-template-columns: 0.15fr 0.3fr 0.5fr 0.5fr 0.4fr 0.2fr 0.15fr;
 }
 
 .prod-list-row .row-item-title{
   font-size: var(--font-medium);
-  font-weight: 700;
+  font-weight: 600;
   text-align: start;
 }
 
 .prod-list-row .row-item-added{
-  font-size: var(--font-medium);
-  font-weight: 500;
+  font-size: 16px;
+  font-weight: 400;
   text-align: start;
 }
 
@@ -145,7 +145,7 @@
 @media screen and (max-width:1050px){
   
   .prod-list-row{
-    grid-template-columns: 0.15fr 0.3fr 0.5fr 0.4fr 0.2fr 0.15fr;
+    grid-template-columns: 0.15fr 0.3fr 0.5fr 0.5fr 0.4fr 0.2fr 0.15fr;
   }
 
   .prod-list-title-section{
@@ -172,7 +172,7 @@
   }
 
   .prod-list-row{
-    grid-template-columns: 0.15fr 0.3fr 0.5fr 0.4fr 0.2fr 0.15fr;
+    grid-template-columns: 0.15fr 0.3fr 0.5fr 0.5fr 0.4fr 0.2fr 0.15fr;
   }
 
   .prod-list-table{

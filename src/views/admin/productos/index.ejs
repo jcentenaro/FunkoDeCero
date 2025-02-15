@@ -41,9 +41,10 @@
                 <th class="prod-list-row-item row-item-title">ID</th>
                 <th class="prod-list-row-item row-item-title">Código</th>
                 <th class="prod-list-row-item row-item-title">Nombre del Producto</th>
+                <th class="prod-list-row-item row-item-title">Descripción</th>
                 <th class="prod-list-row-item row-item-title">Licencia</th>
                 <th class="prod-list-row-item row-item-title">Imagen</th>
-                <th class="prod-list-row-item row-item-title">Edit/Borrar</th>
+                <th class="prod-list-row-item row-item-title">Edit</th>
               </tr>
               <tr class="prod-list-row">
 
@@ -52,6 +53,9 @@
                   <td class="prod-list-row-item row-item-added"><%= product.sku %></td>
                   <td class="prod-list-row-item row-item-added">
                     <%= product.nombre.length > 30 ? product.nombre.substring(0, 30) + '...' : product.nombre %>
+                  </td>
+                  <td class="prod-list-row-item row-item-added" style="font-size: small;">
+                    <%= product.nombre.length > 30 ? product.description.substring(0, 30) + '...' : product.description %>
                   </td>
                   <td class="prod-list-row-item row-item-added"><%= product.licence.nombre %></td>
                   <td class="prod-list-row-item row-item-added">

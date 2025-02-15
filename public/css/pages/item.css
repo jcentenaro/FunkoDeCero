@@ -4,6 +4,16 @@
     display: grid;
 }
 
+/* style.css */
+.pre {
+    font-size: 18px;
+    font-family: var(--secondary-font);
+    max-width: 600px;
+    word-wrap: break-word;
+    overflow-x: auto;
+    white-space: pre-wrap;
+  }
+
 .products{
     display:grid;
     grid-template-columns: repeat(2, 1fr);
@@ -53,6 +63,7 @@
 
 .products-collection-title {
     font-size: 16px;
+    
 }
 .add-link{
     display:block;
